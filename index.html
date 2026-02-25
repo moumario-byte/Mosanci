@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mosanci Innenausbau</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    *{box-sizing:border-box;}
+    body{
+      margin:0;
+      font-family:'Inter',sans-serif;
+      background:#ffffff;
+      color:#1f2328;
+    }
+    img{max-width:100%;height:auto;display:block;}
+    a{color:inherit;}
+
+    /* ================= FIXED HEADER ================= */
+    .topHeader{
+      position:fixed;
+      top:0;
+      left:0;
+      right:0;
+      z-index:9999;
+      background:#ffffff;
+      height:92px;
+      display:flex;
+      align-items:center;
+      border-bottom:1px solid rgba(226,229,232,.9);
+      box-shadow:0 12px 28px rgba(0,0,0,.10);
+    }
+
+    .topHeader::after{
+      content:"";
+      position:absolute;
+      left:0;
+      right:0;
+      bottom:-38px;
+      height:38px;
+      pointer-events:none;
+      background:linear-gradient(to bottom, rgba(0,0,0,.22), rgba(0,0,0,0));
+      filter:blur(10px);
+      opacity:.35;
+    }
+
+    .navwrap{
+      width:min(1180px,100%);
+      margin:0 auto;
+      padding:0 16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+    }
+
+    /* Header logo */
+    .logoArea img{
+      height:69px;
+      width:auto;
+      display:block;
+    }
+
+    .nav{
+      list-style:none;
+      display:flex;
+      gap:12px;
+      margin:0;
+      padding:0;
+      align-items:center;
+    }
+
+    .nav a{
+      text-decoration:none;
+      font-weight:800;
+      color:#2e3338;
+      padding:12px 18px;
+      border-radius:1px;
+      background:#f1f3f5;
+      transition:.2s ease;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+    }
+    .nav a:hover{ background:#ff6a00; color:#fff; }
+    .nav a.active{ background:#b8302a; color:#fff; }
+    .chev{ font-size:12px; opacity:.85; transform:translateY(-1px); }
+
+    .rightArea{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      white-space:nowrap;
+    }
+
+    .login{
+      background:#1f2328;
+      color:#fff;
+      padding:12px 18px;
+      border-radius:0px;
+      text-decoration:none;
+      font-weight:900;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+    }
+    .login svg{ width:18px; height:18px; fill:#fff; }
+
+    .lang{
+      display:flex;
+      align-items:center;
+      gap:6px;
+      padding:12px 14px;
+      border-radius:1px;
+      border:1px solid #e2e5e8;
+      font-weight:800;
+      color:#2e3338;
+      cursor:pointer;
+    }
+    .flagDot{
+      width:18px;height:18px;border-radius:50%;
+      background:linear-gradient(#000 0 33%, #dd0000 33% 66%, #ffce00 66% 100%);
+    }
+
+    /* ================= PAGE CONTENT ================= */
+    .pageContent{
+      padding-top:130px;
+      animation:fadeIn .18s ease;
+    }
+    @keyframes fadeIn{
+      from{opacity:0; transform:translateY(6px);}
+      to{opacity:1; transform:translateY(0);}
+    }
+
+    /* ================= HERO ================= */
+    .splitHero-image{
+      height:440px;
+      background:url("assets/bathroom.jpg") center/cover no-repeat;
+    }
+
+    .splitHero-content{
+      background:#ececec;
+      padding:120px 20px 90px;
+      margin-top:-80px;
+      border-top-left-radius:20px;
+      border-top-right-radius:20px;
+      text-align:center;
+    }
+
+    .splitHero-inner{
+      max-width:900px;
+      margin:0 auto;
+    }
+
+    .splitHero-titleRow{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      gap:18px;
+      flex-wrap:wrap;
+    }
+
+    .splitHero h1{
+      margin:0;
+      font-size:54px;
+      font-weight:900;
+      letter-spacing:.4px;
+    }
+
+    .splitHero-tagline{
+      margin-top:12px;
+      font-size:16px;
+      color:#6f757c;
+      font-weight:600;
+    }
+
+    .splitHero-desc{
+      margin:36px auto 0;
+      max-width:820px;
+      font-size:16px;
+      line-height:1.8;
+      color:#6f757c;
+      font-weight:500;
+    }
+
+    .hero-buttons{
+      margin-top:46px;
+      display:flex;
+      justify-content:center;
+      gap:22px;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      height:52px;
+      padding:0 30px;
+      min-width:280px;
+      border-radius:0px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      text-decoration:none;
+      font-weight:800;
+      font-size:15px;
+      transition:.2s ease;
+    }
+    .btn-orange{ background:#ff6a00; color:#fff; }
+    .btn-orange:hover{ background:#e85f00; }
+    .btn-dark{ background:#222529; color:#fff; }
+    .btn-dark:hover{ background:#16181b; }
+
+    /* ================= SERVICES ================= */
+    .services{
+      background:#f5f6f7;
+      padding:80px 20px;
+      text-align:center;
+    }
+    .services-container{
+      max-width:1100px;
+      margin:0 auto;
+    }
+    .services h2{
+      font-size:32px;
+      font-weight:900;
+      margin:0 0 12px;
+      color:#1f2328;
+    }
+    .services-subtitle{
+      max-width:700px;
+      margin:0 auto 50px;
+      color:#6f757c;
+      line-height:1.6;
+      font-weight:500;
+    }
+    .services-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:26px;
+      text-align:left;
+    }
+
+    .service-card{
+      background:#ffffff;
+      padding:26px 26px 28px;
+      border-radius:12px;
+      border:1px solid #eef0f2;
+      box-shadow:0 10px 22px rgba(0,0,0,.08);
+      transition:.18s ease;
+    }
+    .service-card:hover{
+      transform:translateY(-8px) scale(1.02);
+      border-color:#ff6a00;
+      box-shadow:0 22px 55px rgba(0,0,0,.18);
+    }
+
+    .service-icon{
+      width:44px;
+      height:44px;
+      border-radius:4px;
+      background:#2b2f33;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      margin-bottom:16px;
+    }
+    .service-icon svg{ width:22px; height:22px; fill:#fff; }
+
+    .service-card h3{
+      margin:0 0 10px;
+      font-size:18px;
+      font-weight:900;
+      color:#1f2328;
+    }
+    .service-card p{
+      margin:0;
+      color:#6f757c;
+      line-height:1.6;
+      font-weight:500;
+    }
+
+    .services-button{
+      display:inline-block;
+      margin-top:48px;
+      padding:14px 28px;
+      background:#2b2f33;
+      color:#fff;
+      text-decoration:none;
+      border-radius:0px;
+      font-weight:900;
+      transition:.2s ease;
+    }
+    .services-button:hover{ background:#1f2124; }
+
+    /* ================= INSTAGRAM SECTION ================= */
+    .instaSection{
+      background:#ffffff;
+      padding:80px 20px;
+      text-align:center;
+    }
+    .instaInner{
+      max-width:1100px;
+      margin:0 auto;
+    }
+    .instaInner h2{
+      margin:0 0 10px;
+      font-size:32px;
+      font-weight:900;
+    }
+    .instaInner p{
+      margin:0 0 30px;
+      color:#6f757c;
+      font-weight:600;
+    }
+    .instaFeedWrapper{
+      max-width:1200px;
+      margin:0 auto;
+      background:#fff;
+      border:1px solid #eef0f2;
+      border-radius:14px;
+      box-shadow:0 18px 50px rgba(0,0,0,.10);
+      overflow:hidden;
+      padding:18px;
+    }
+
+    /* ================= FOOTER ================= */
+    footer{
+      background:#25272a;
+      color:#f1f3f5;
+      margin-top:0;
+    }
+    .footerTop{
+      max-width:1100px;
+      margin:0 auto;
+      padding:60px 20px;
+      display:grid;
+      grid-template-columns:1.3fr 1fr 1fr;
+      gap:40px;
+    }
+    .footerBrand h3{ margin:0; font-weight:900; }
+    .footerBrand p{
+      margin-top:12px;
+      line-height:1.6;
+      color:#cfd3d7;
+      font-weight:500;
+    }
+    .footerCol h4{ margin:0 0 15px; font-weight:900; }
+
+    .footer-contact{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin-bottom:12px;
+      color:#cfd3d7;
+      font-weight:600;
+      text-decoration:none;
+    }
+    .footer-contact svg{
+      width:16px;
+      height:16px;
+      fill:#cfd3d7;
+      flex:0 0 16px;
+    }
+
+    .footerCol a.link{
+      display:block;
+      margin-bottom:10px;
+      color:#cfd3d7;
+      text-decoration:none;
+      font-weight:600;
+      transition:.2s ease;
+    }
+    .footerCol a.link:hover{ color:#fff; }
+
+    .footerBottom{
+      border-top:1px solid rgba(255,255,255,.08);
+      text-align:center;
+      padding:20px;
+      font-size:13px;
+      color:#9ca3af;
+      font-weight:600;
+    }
+
+    /* ================= EXISTING RESPONSIVE ================= */
+    @media (max-width:980px){
+      .topHeader{ height:auto; padding:12px 0; }
+      .navwrap{ flex-wrap:wrap; justify-content:center; }
+      .nav{ flex-wrap:wrap; justify-content:center; }
+      .pageContent{ padding-top:140px; }
+      .services-grid{ grid-template-columns:1fr; }
+      .footerTop{ grid-template-columns:1fr; }
+      .splitHero h1{ font-size:40px; }
+      .instaFeedWrapper{ padding:10px; }
+    }
+
+    /* ================= Mobile header like ausbau.nrw (Desktop unchanged) ================= */
+    .mobileActions{ display:none; } /* hidden on desktop */
+
+    @media (max-width:700px){
+      /* Hide desktop nav + right area */
+      .nav, .rightArea { display:none; }
+
+      /* Clean header */
+      .topHeader{
+        height:72px;
+        padding:0;
+      }
+      .navwrap{
+        width:100%;
+        padding:0 14px;
+        flex-wrap:nowrap;
+        justify-content:space-between;
+      }
+      .logoArea img{ height:44px; }
+
+      /* Show mobile actions */
+      .mobileActions{
+        display:flex;
+        align-items:center;
+        gap:10px;
+      }
+
+      /* Language pill */
+      .langPill{
+        display:inline-flex;
+        align-items:center;
+        gap:8px;
+        padding:10px 12px;
+        background:#fff;
+        border:1px solid #e2e5e8;
+        font-weight:800;
+        border-radius:10px;
+        cursor:pointer;
+      }
+
+      /* Burger */
+      .burger{
+        width:44px;
+        height:44px;
+        border:1px solid #e2e5e8;
+        background:#fff;
+        border-radius:10px;
+        display:inline-flex;
+        flex-direction:column;
+        justify-content:center;
+        gap:6px;
+        padding:0 12px;
+        cursor:pointer;
+      }
+      .burger span{
+        display:block;
+        height:2px;
+        background:#1f2328;
+        border-radius:2px;
+      }
+
+      /* Mobile menu drawer */
+      .mobileMenu{
+        position:fixed;
+        top:72px;
+        left:0;
+        right:0;
+        background:#fff;
+        border-top:1px solid #eef0f2;
+        box-shadow:0 18px 50px rgba(0,0,0,.14);
+        transform:translateY(-8px);
+        opacity:0;
+        pointer-events:none;
+        transition:.18s ease;
+        z-index:9998;
+        padding:12px;
+        display:grid;
+        gap:10px;
+      }
+      .mobileMenu a{
+        padding:14px 14px;
+        background:#f1f3f5;
+        border-radius:12px;
+        font-weight:900;
+        text-decoration:none;
+        color:#1f2328;
+        text-align:center;
+      }
+      .mobileMenu a:active{ transform:scale(.99); }
+      .mobileMenu .mobileLogin{
+        background:#1f2328;
+        color:#fff;
+      }
+
+      body.menuOpen .mobileMenu{
+        transform:translateY(0);
+        opacity:1;
+        pointer-events:auto;
+      }
+
+      /* Adjust content spacing for smaller fixed header */
+      .pageContent{ padding-top:105px; }
+
+      /* Make hero feel better on mobile */
+      .splitHero-image{ height:260px; }
+      .splitHero-content{
+        padding:70px 16px 55px;
+        margin-top:-45px;
+        border-top-left-radius:16px;
+        border-top-right-radius:16px;
+      }
+      .splitHero h1{ font-size:30px; line-height:1.1; }
+      .splitHero-desc{ margin-top:18px; font-size:15px; line-height:1.7; }
+      .hero-buttons{ margin-top:26px; gap:12px; }
+      .btn{ min-width:100%; height:48px; }
+
+      .services{ padding:55px 16px; }
+      .services h2{ font-size:26px; }
+      .services-subtitle{ margin-bottom:28px; }
+      .services-grid{ grid-template-columns:1fr; gap:16px; }
+
+      .instaSection{ padding:55px 16px; }
+      .instaInner h2{ font-size:26px; }
+      .instaFeedWrapper{ padding:10px; border-radius:12px; }
+
+      .footerTop{ grid-template-columns:1fr; padding:45px 16px; gap:26px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="topHeader">
+    <div class="navwrap">
+      <div class="logoArea">
+        <img src="logo.png" alt="Mosanci Innenausbau">
+      </div>
+
+      <!-- Desktop NAV (hidden on mobile via CSS above) -->
+      <ul class="nav">
+        <li><a class="active" href="index.html">Startseite</a></li>
+        <li><a href="ueber-uns.html">Über uns <span class="chev">▾</span></a></li>
+        <li><a href="dienstleistungen.html">Dienstleistungen <span class="chev">▾</span></a></li>
+        <li><a href="porfolio.html">Portfolio</a></li>
+        <li><a href="kontakt.html">Kontakt</a></li>
+      </ul>
+
+      <!-- Desktop right area (hidden on mobile via CSS above) -->
+      <div class="rightArea">
+        <a class="login" href="#">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 12a4.5 4.5 0 1 0-4.5-4.5A4.5 4.5 0 0 0 12 12Zm0 2c-4.42 0-8 2.24-8 5v1h16v-1c0-2.76-3.58-5-8-5Z"/>
+          </svg>
+          Login
+        </a>
+
+        <div class="lang">
+          <span class="flagDot" aria-hidden="true"></span>
+          <span>DE</span>
+          <span class="chev">▾</span>
+        </div>
+      </div>
+
+      <!-- Mobile actions (only visible on mobile) -->
+      <div class="mobileActions">
+        <button class="langPill" type="button" aria-label="Sprache">
+          <span class="flagDot" aria-hidden="true"></span>
+          <span>DE</span>
+          <span class="chev">▾</span>
+        </button>
+
+        <button class="burger" type="button" aria-label="Menü öffnen" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile menu drawer -->
+  <nav class="mobileMenu" aria-label="Mobile Navigation">
+    <a href="index.html">Startseite</a>
+    <a href="ueber-uns.html">Über uns</a>
+    <a href="dienstleistungen.html">Dienstleistungen</a>
+    <a href="porfolio.html">Portfolio</a></li>
+    <a href="kontakt.html">Kontakt</a>
+    <a class="mobileLogin" href="#">Login</a>
+  </nav>
+
+  <!-- PAGE CONTENT -->
+  <div class="pageContent">
+
+    <!-- HERO -->
+    <section class="splitHero">
+      <div class="splitHero-image"></div>
+
+      <div class="splitHero-content">
+        <div class="splitHero-inner">
+          <div class="splitHero-titleRow">
+            <h1>MOSANCI INNENAUSBAU</h1>
+          </div>
+
+          <div class="splitHero-tagline">Ihr Partner für Innenausbau &amp; Renovierung</div>
+
+          <p class="splitHero-desc">
+            Wir verwandeln Wohnräume in Heinsberg und Umgebung – zuverlässig, präzise
+            und mit höchsten Qualitätsstandards.
+          </p>
+
+          <div class="hero-buttons">
+            <a href="kontakt.html" class="btn btn-orange">Kostenlose Beratung anfordern</a>
+            <a href="#" class="btn btn-dark">Kunden Login</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="services">
+      <div class="services-container">
+        <h2>Unsere Dienstleistungen</h2>
+        <p class="services-subtitle">
+          Maßgeschneiderte Lösungen für Ihr Zuhause. Wir bieten ein umfassendes Leistungsspektrum
+          für Neubau und Altbausanierung.
+        </p>
+
+        <div class="services-grid">
+
+          <div class="service-card">
+            <div class="service-icon">
+              <svg viewBox="0 0 24 24"><path d="M4 6h16v4H4V6Zm0 6h16v6H4v-6Zm2 2v2h4v-2H6Z"/></svg>
+            </div>
+            <h3>Trocken- &amp; Akustikbau</h3>
+            <p>Professionelle Trockenbauarbeiten und Akustiklösungen für optimale Raumgestaltung.</p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 2 4 6v6c0 5 3.4 9.4 8 10 4.6-.6 8-5 8-10V6l-8-4Z"/></svg>
+            </div>
+            <h3>Dämmtechnik</h3>
+            <p>Hochwertige Dämmarbeiten für Energieeffizienz, Schallschutz und Wohnkomfort.</p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon">
+              <svg viewBox="0 0 24 24"><path d="M7 2h10v20H7V2Zm2 2v16h6V4H9Zm1 8h4v2h-4v-2Z"/></svg>
+            </div>
+            <h3>Innentürmontage</h3>
+            <p>Fachgerechte Montage von Innentüren – präzise Passform und Funktionalität.</p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon">
+              <svg viewBox="0 0 24 24"><path d="M4 4h7v7H4V4Zm9 0h7v7h-7V4ZM4 13h7v7H4v-7Zm9 4h7v3h-7v-3Z"/></svg>
+            </div>
+            <h3>Bodenbelagsarbeiten</h3>
+            <p>Verlegung verschiedener Bodenbeläge – von Laminat bis Fliesen und Vinyl.</p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon">
+              <svg viewBox="0 0 24 24"><path d="M7 14 3 18v3h3l4-4-3-3Zm2-2 3 3 8-8-3-3-8 8Z"/></svg>
+            </div>
+            <h3>Maler- &amp; Beschichtungsarbeiten</h3>
+            <p>Professionelle Malerarbeiten, Lackierungen und hochwertige Oberflächenbeschichtungen.</p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 2 2 7l10 5 10-5-10-5Zm0 7L2 4v6l10 5 10-5V4l-10 5Zm0 6L2 10v7l10 5 10-5v-7l-10 5Z"/></svg>
+            </div>
+            <h3>PU-Designböden (3D Optik)</h3>
+            <p>Moderne Designböden mit beeindruckender 3D-Optik für einzigartige Räume.</p>
+          </div>
+
+        </div>
+
+        <a href="dienstleistungen.html" class="services-button">Alle Dienstleistungen ansehen</a>
+      </div>
+    </section>
+
+    <!-- INSTAGRAM -->
+    <section class="instaSection">
+      <div class="instaInner">
+        <h2>Instagram</h2>
+        <p>@mosancii – aktuelle Projekte &amp; Einblicke</p>
+
+        <div class="instaFeedWrapper">
+          <div class="elfsight-app-0a167e86-6728-4f6d-8b53-f727f9d594a7"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footerTop">
+        <div class="footerBrand">
+          <h3>Mosanci Innenausbau</h3>
+          <p>Ihr Partner für professionellen Innenausbau &amp; Renovierung. Qualität und Präzision seit Jahren.</p>
+        </div>
+
+        <div class="footerCol">
+          <h4>Kontakt</h4>
+
+          <a class="footer-contact" href="tel:+4924528607038">
+            <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V21a1 1 0 0 1-1 1C10.85 22 2 13.15 2 2a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.24.2 2.45.57 3.57a1 1 0 0 1-.25 1.02l-2.2 2.2Z"/></svg>
+            +49 (0) 2452 8607038
+          </a>
+
+          <a class="footer-contact" href="mailto:info@mosanci.de">
+            <svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4-8 5L4 8V6l8 5 8-5Z"/></svg>
+            info@mosanci.de
+          </a>
+
+          <div class="footer-contact" style="cursor:default;">
+            <svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Z"/></svg>
+            Am Diebsweg 17, 52525 Heinsberg
+          </div>
+        </div>
+
+        <div class="footerCol">
+          <h4>Quick Links</h4>
+          <a class="link" href="ueber-uns.html">Über uns</a>
+          <a class="link" href="dienstleistungen.html">Dienstleistungen</a>
+          <a class="link" href="portfolio.html">Portfolio</a>
+          <a class="link" href="kontakt.html">Kontakt</a>
+          <a class="link" href="#">Impressum &amp; Datenschutz</a>
+        </div>
+      </div>
+
+      <div class="footerBottom">
+        © 2025 Mosanci Innenausbau. Alle Rechte vorbehalten.
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Elfsight -->
+  <script src="https://elfsightcdn.com/platform.js" async></script>
+
+  <!-- Mobile menu toggle -->
+  <script>
+    const burger = document.querySelector(".burger");
+    if (burger) {
+      burger.addEventListener("click", () => {
+        const open = document.body.classList.toggle("menuOpen");
+        burger.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+    }
+  </script>
+
+</body>
+</html>

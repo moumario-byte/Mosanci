@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Portfolio – Mosanci Innenausbau</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  font-family:'Inter',sans-serif;
+  background:#ffffff;
+  color:#1f2328;
+}
+img{max-width:100%;height:auto;display:block;}
+a{color:inherit;}
+button{font-family:inherit;}
+
+/* ================= FIXED HEADER (EXACT AS YOUR INDEX) ================= */
+.topHeader{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  z-index:9999;
+  background:#ffffff;
+  height:92px;
+  display:flex;
+  align-items:center;
+  border-bottom:1px solid rgba(226,229,232,.9);
+  box-shadow:0 12px 28px rgba(0,0,0,.10);
+}
+
+.topHeader::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:-38px;
+  height:38px;
+  pointer-events:none;
+  background:linear-gradient(to bottom, rgba(0,0,0,.22), rgba(0,0,0,0));
+  filter:blur(10px);
+  opacity:.35;
+}
+
+.navwrap{
+  width:min(1180px,100%);
+  margin:0 auto;
+  padding:0 16px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+}
+
+/* Header logo */
+.logoArea img{
+  height:69px;
+  width:auto;
+  display:block;
+}
+
+.nav{
+  list-style:none;
+  display:flex;
+  gap:12px;
+  margin:0;
+  padding:0;
+  align-items:center;
+}
+
+.nav a{
+  text-decoration:none;
+  font-weight:800;
+  color:#2e3338;
+  padding:12px 18px;
+  border-radius:1px;
+  background:#f1f3f5;
+  transition:.2s ease;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+.nav a:hover{ background:#ff6a00; color:#fff; }
+.nav a.active{ background:#b8302a; color:#fff; }
+.chev{ font-size:12px; opacity:.85; transform:translateY(-1px); }
+
+.rightArea{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  white-space:nowrap;
+}
+
+.login{
+  background:#1f2328;
+  color:#fff;
+  padding:12px 18px;
+  border-radius:0px;
+  text-decoration:none;
+  font-weight:900;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+}
+.login svg{ width:18px; height:18px; fill:#fff; }
+
+.lang{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  padding:12px 14px;
+  border-radius:1px;
+  border:1px solid #e2e5e8;
+  font-weight:800;
+  color:#2e3338;
+  cursor:pointer;
+}
+.flagDot{
+  width:18px;height:18px;border-radius:50%;
+  background:linear-gradient(#000 0 33%, #dd0000 33% 66%, #ffce00 66% 100%);
+}
+
+/* ================= PAGE CONTENT (EXACT AS YOUR INDEX) ================= */
+.pageContent{
+  padding-top:130px;
+  animation:fadeIn .18s ease;
+}
+@keyframes fadeIn{
+  from{opacity:0; transform:translateY(6px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+/* ================= PORTFOLIO PAGE ================= */
+.section{ padding:50px 20px; }
+.inner{ max-width:1100px; margin:0 auto; }
+
+.pageHead{
+  text-align:center;
+  padding:10px 0 30px;
+}
+.pageHead h1{
+  margin:0;
+  font-size:42px;
+  font-weight:900;
+}
+.pageHead p{
+  margin:14px auto 0;
+  max-width:850px;
+  color:#6f757c;
+  font-weight:700;
+  line-height:1.7;
+  font-size:13px;
+}
+
+/* ================= PORTFOLIO CATEGORY GRID ================= */
+.grid{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:26px;
+  margin-top:10px;
+}
+
+.pCard{
+  background:#ffffff;
+  border:1px solid #eef0f2;
+  border-radius:12px;
+  box-shadow:0 10px 22px rgba(0,0,0,.08);
+  text-decoration:none;
+  color:inherit;
+  transition:.18s ease;
+  display:block;
+  overflow:hidden;
+  cursor:pointer;
+}
+.pCard:hover{
+  transform:translateY(-3px);
+  border-color:#ff6a00;
+  box-shadow:0 18px 35px rgba(0,0,0,.12);
+}
+
+.pThumb{
+  height:190px;
+  background:#dfe3e8 center/cover no-repeat;
+}
+.pBody{
+  padding:18px 18px 20px;
+}
+.pBody h3{
+  margin:0 0 8px;
+  font-size:16px;
+  font-weight:900;
+}
+.pBody p{
+  margin:0;
+  color:#6f757c;
+  font-weight:600;
+  font-size:12px;
+  line-height:1.65;
+}
+
+.pill{
+  position:absolute;
+  top:14px;
+  left:14px;
+  background:#1f2328;
+  color:#fff;
+  font-weight:900;
+  font-size:11px;
+  padding:7px 10px;
+  border-radius:999px;
+  letter-spacing:.2px;
+  opacity:.95;
+}
+.pWrap{ position:relative; }
+
+/* ================= CTA ================= */
+.cta{
+  background:#1f2328;
+  color:#fff;
+  padding:50px 20px;
+  border-radius:14px;
+  text-align:center;
+  margin-top:60px;
+  box-shadow:0 18px 45px rgba(0,0,0,.12);
+}
+.cta h2{ margin:0 0 10px; font-size:26px; font-weight:900; }
+.cta p{
+  margin:0 auto 16px;
+  max-width:800px;
+  color:rgba(255,255,255,.92);
+  font-weight:600;
+  line-height:1.6;
+  font-size:13px;
+}
+.cta a{
+  display:inline-block;
+  background:#ff6a00;
+  color:#fff;
+  padding:12px 20px;
+  border-radius:10px;
+  font-weight:900;
+  text-decoration:none;
+  transition:.2s ease;
+}
+.cta a:hover{ background:#e65c00; }
+
+/* ================= MODAL (gallery view) ================= */
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.65);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+  z-index:10000;
+}
+.modal.open{ display:flex; }
+
+.modalCard{
+  width:min(1100px, 100%);
+  background:#ffffff;
+  border-radius:16px;
+  overflow:hidden;
+  box-shadow:0 30px 90px rgba(0,0,0,.35);
+  animation:pop .16s ease;
+}
+@keyframes pop{
+  from{ transform:translateY(8px) scale(.98); opacity:0; }
+  to{ transform:translateY(0) scale(1); opacity:1; }
+}
+
+.modalTop{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:18px 18px;
+  border-bottom:1px solid #eef0f2;
+  background:#fff;
+}
+.modalTop h3{
+  margin:0;
+  font-size:18px;
+  font-weight:900;
+}
+.closeBtn{
+  border:0;
+  background:#1f2328;
+  color:#fff;
+  font-weight:900;
+  padding:10px 14px;
+  cursor:pointer;
+  border-radius:10px;
+}
+.closeBtn:hover{ background:#ff6a00; }
+
+.galleryGrid{
+  padding:18px;
+  background:#f8f9fa;
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:14px;
+  max-height:70vh;
+  overflow:auto;
+}
+
+.gItem{
+  background:#fff;
+  border:1px solid #eef0f2;
+  border-radius:12px;
+  overflow:hidden;
+  cursor:pointer;
+  transition:.16s ease;
+}
+.gItem:hover{
+  transform:translateY(-3px);
+  border-color:#ff6a00;
+  box-shadow:0 12px 28px rgba(0,0,0,.12);
+}
+.gImg{
+  width:100%;
+  height:210px;
+  object-fit:cover;
+  display:block;
+}
+
+/* ================= LIGHTBOX (big image) ================= */
+.lightbox{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.78);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:16px;
+  z-index:10001;
+}
+.lightbox.open{ display:flex; }
+.lightboxInner{
+  width:min(1100px, 100%);
+  position:relative;
+}
+.lightboxImg{
+  width:100%;
+  height:auto;
+  display:block;
+  border-radius:14px;
+  box-shadow:0 30px 90px rgba(0,0,0,.45);
+  background:#111;
+}
+.lightboxClose{
+  position:absolute;
+  top:12px;
+  right:12px;
+  border:0;
+  background:#ffffff;
+  font-weight:900;
+  padding:10px 12px;
+  cursor:pointer;
+  border-radius:10px;
+}
+
+/* ================= FOOTER (same vibe as index) ================= */
+footer{
+  background:#25272a;
+  color:#f1f3f5;
+  margin-top:0;
+}
+.footerTop{
+  max-width:1100px;
+  margin:0 auto;
+  padding:60px 20px;
+  display:grid;
+  grid-template-columns:1.3fr 1fr 1fr;
+  gap:40px;
+}
+.footerBrand h3{ margin:0; font-weight:900; }
+.footerBrand p{
+  margin-top:12px;
+  line-height:1.6;
+  color:#cfd3d7;
+  font-weight:500;
+}
+.footerCol h4{ margin:0 0 15px; font-weight:900; }
+
+.footer-contact{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:12px;
+  color:#cfd3d7;
+  font-weight:600;
+  text-decoration:none;
+}
+.footer-contact svg{
+  width:16px;
+  height:16px;
+  fill:#cfd3d7;
+  flex:0 0 16px;
+}
+
+.footerCol a.link{
+  display:block;
+  margin-bottom:10px;
+  color:#cfd3d7;
+  text-decoration:none;
+  font-weight:600;
+  transition:.2s ease;
+}
+.footerCol a.link:hover{ color:#fff; }
+
+.footerBottom{
+  border-top:1px solid rgba(255,255,255,.08);
+  text-align:center;
+  padding:20px;
+  font-size:13px;
+  color:#9ca3af;
+  font-weight:600;
+}
+
+/* ================= EXISTING RESPONSIVE (INDEX STYLE) ================= */
+@media (max-width:980px){
+  .topHeader{ height:auto; padding:12px 0; }
+  .navwrap{ flex-wrap:wrap; justify-content:center; }
+  .nav{ flex-wrap:wrap; justify-content:center; }
+  .pageContent{ padding-top:140px; }
+  .grid{ grid-template-columns:1fr 1fr; }
+  .galleryGrid{ grid-template-columns:1fr 1fr; }
+  .footerTop{ grid-template-columns:1fr; }
+}
+
+/* ================= Mobile header like ausbau.nrw (Desktop unchanged) ================= */
+.mobileActions{ display:none; } /* hidden on desktop */
+
+@media (max-width:700px){
+  /* Hide desktop nav + right area */
+  .nav, .rightArea { display:none; }
+
+  /* Clean header */
+  .topHeader{
+    height:72px;
+    padding:0;
+  }
+  .navwrap{
+    width:100%;
+    padding:0 14px;
+    flex-wrap:nowrap;
+    justify-content:space-between;
+  }
+  .logoArea img{ height:44px; }
+
+  /* Show mobile actions */
+  .mobileActions{
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+
+  /* Language pill */
+  .langPill{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:10px 12px;
+    background:#fff;
+    border:1px solid #e2e5e8;
+    font-weight:800;
+    border-radius:10px;
+    cursor:pointer;
+  }
+
+  /* Burger */
+  .burger{
+    width:44px;
+    height:44px;
+    border:1px solid #e2e5e8;
+    background:#fff;
+    border-radius:10px;
+    display:inline-flex;
+    flex-direction:column;
+    justify-content:center;
+    gap:6px;
+    padding:0 12px;
+    cursor:pointer;
+  }
+  .burger span{
+    display:block;
+    height:2px;
+    background:#1f2328;
+    border-radius:2px;
+  }
+
+  /* Mobile menu drawer */
+  .mobileMenu{
+    position:fixed;
+    top:72px;
+    left:0;
+    right:0;
+    background:#fff;
+    border-top:1px solid #eef0f2;
+    box-shadow:0 18px 50px rgba(0,0,0,.14);
+    transform:translateY(-8px);
+    opacity:0;
+    pointer-events:none;
+    transition:.18s ease;
+    z-index:9998;
+    padding:12px;
+    display:grid;
+    gap:10px;
+  }
+  .mobileMenu a{
+    padding:14px 14px;
+    background:#f1f3f5;
+    border-radius:12px;
+    font-weight:900;
+    text-decoration:none;
+    color:#1f2328;
+    text-align:center;
+  }
+  .mobileMenu a:active{ transform:scale(.99); }
+  .mobileMenu .mobileLogin{
+    background:#1f2328;
+    color:#fff;
+  }
+
+  body.menuOpen .mobileMenu{
+    transform:translateY(0);
+    opacity:1;
+    pointer-events:auto;
+  }
+
+  /* Adjust content spacing for smaller fixed header */
+  .pageContent{ padding-top:105px; }
+
+  .grid{ grid-template-columns:1fr; }
+  .galleryGrid{ grid-template-columns:1fr; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER (EXACT AS YOUR INDEX) -->
+<header class="topHeader">
+  <div class="navwrap">
+    <div class="logoArea">
+      <img src="logo.png" alt="Mosanci Innenausbau">
+    </div>
+
+    <!-- Desktop NAV (hidden on mobile via CSS above) -->
+    <ul class="nav">
+      <li><a href="index.html">Startseite</a></li>
+      <li><a href="ueber-uns.html">Über uns <span class="chev">▾</span></a></li>
+      <li><a href="dienstleistungen.html">Dienstleistungen <span class="chev">▾</span></a></li>
+      <li><a class="active" href="portfolio.html">Portfolio</a></li>
+      <li><a href="kontakt.html">Kontakt</a></li>
+    </ul>
+
+    <!-- Desktop right area (hidden on mobile via CSS above) -->
+    <div class="rightArea">
+      <a class="login" href="#">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 12a4.5 4.5 0 1 0-4.5-4.5A4.5 4.5 0 0 0 12 12Zm0 2c-4.42 0-8 2.24-8 5v1h16v-1c0-2.76-3.58-5-8-5Z"/>
+        </svg>
+        Login
+      </a>
+
+      <div class="lang">
+        <span class="flagDot" aria-hidden="true"></span>
+        <span>DE</span>
+        <span class="chev">▾</span>
+      </div>
+    </div>
+
+    <!-- Mobile actions (only visible on mobile) -->
+    <div class="mobileActions">
+      <button class="langPill" type="button" aria-label="Sprache">
+        <span class="flagDot" aria-hidden="true"></span>
+        <span>DE</span>
+        <span class="chev">▾</span>
+      </button>
+
+      <button class="burger" type="button" aria-label="Menü öffnen" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile menu drawer (EXACT AS YOUR INDEX) -->
+<nav class="mobileMenu" aria-label="Mobile Navigation">
+  <a href="index.html">Startseite</a>
+  <a href="ueber-uns.html">Über uns</a>
+  <a href="dienstleistungen.html">Dienstleistungen</a>
+  <a href="portfolio.html">Portfolio</a>
+  <a href="kontakt.html">Kontakt</a>
+  <a class="mobileLogin" href="#">Login</a>
+</nav>
+
+<!-- PAGE CONTENT -->
+<div class="pageContent">
+
+  <section class="section">
+    <div class="inner">
+
+      <div class="pageHead">
+        <h1>Portfolio</h1>
+        <p>
+          Klicken Sie auf eine Kategorie (z.B. Fliesenarbeiten), um alle Bilder zu sehen.
+          Danach können Sie jedes Bild anklicken, um es groß zu öffnen.
+        </p>
+      </div>
+
+      <!-- CATEGORY GRID -->
+      <div class="grid" id="catGrid"></div>
+
+      <div class="cta">
+        <h2>Projekt starten?</h2>
+        <p>Kontaktieren Sie uns für eine kostenlose Beratung und ein unverbindliches Angebot.</p>
+        <a href="kontakt.html">Jetzt Beratung anfragen</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER (INDEX STYLE) -->
+  <footer>
+    <div class="footerTop">
+      <div class="footerBrand">
+        <h3>Mosanci Innenausbau</h3>
+        <p>Ihr Partner für professionellen Innenausbau &amp; Renovierung. Qualität und Präzision seit Jahren.</p>
+      </div>
+
+      <div class="footerCol">
+        <h4>Kontakt</h4>
+
+        <a class="footer-contact" href="tel:+4924528607038">
+          <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V21a1 1 0 0 1-1 1C10.85 22 2 13.15 2 2a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.24.2 2.45.57 3.57a1 1 0 0 1-.25 1.02l-2.2 2.2Z"/></svg>
+          +49 (0) 2452 8607038
+        </a>
+
+        <a class="footer-contact" href="mailto:info@mosanci.de">
+          <svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4-8 5L4 8V6l8 5 8-5Z"/></svg>
+          info@mosanci.de
+        </a>
+
+        <div class="footer-contact" style="cursor:default;">
+          <svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Z"/></svg>
+          Am Diebsweg 17, 52525 Heinsberg
+        </div>
+      </div>
+
+      <div class="footerCol">
+        <h4>Quick Links</h4>
+        <a class="link" href="ueber-uns.html">Über uns</a>
+        <a class="link" href="dienstleistungen.html">Dienstleistungen</a>
+        <a class="link" href="portfolio.html">Portfolio</a>
+        <a class="link" href="kontakt.html">Kontakt</a>
+        <a class="link" href="#">Impressum &amp; Datenschutz</a>
+      </div>
+    </div>
+
+    <div class="footerBottom">
+      © 2025 Mosanci Innenausbau. Alle Rechte vorbehalten.
+    </div>
+  </footer>
+
+</div>
+
+<!-- MODAL (gallery) -->
+<div class="modal" id="modal" aria-hidden="true">
+  <div class="modalCard" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modalTop">
+      <h3 id="modalTitle">Galerie</h3>
+      <button class="closeBtn" id="closeModalBtn">Schließen ✕</button>
+    </div>
+    <div class="galleryGrid" id="galleryGrid"></div>
+  </div>
+</div>
+
+<!-- LIGHTBOX (big image) -->
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <div class="lightboxInner">
+    <button class="lightboxClose" id="closeLightboxBtn">Schließen ✕</button>
+    <img class="lightboxImg" id="lightboxImg" alt="Projektbild">
+  </div>
+</div>
+
+<script>
+  /*
+    ✅ EDIT THESE:
+    Put your images in folders like:
+
+    assets/assets/fliesen/cover.jpg
+    assets/assets/fliesen/1.jpg
+    assets/assets/fliesen/2.jpg
+
+    assets/assets/bad/cover.jpg
+    assets/assets/bad/1.jpg ...
+  */
+
+  const CATEGORIES = [
+    {
+      key: "fliesen",
+      title: "Fliesenarbeiten",
+      subtitle: "Bad, Küche, Boden & Wand – sauber und präzise.",
+      thumb: "assets/fliesen/cover.jpg",
+      images: [
+        "assets/assets/fliesen/1.jpg",
+        "assets/assets/fliesen/2.jpg",
+        "assets/assets/fliesen/3.jpg"
+      ]
+    },
+    {
+      key: "boden",
+      title: "Bodenbeläge",
+      subtitle: "Vinyl, Laminat, Designboden – modern & langlebig.",
+      thumb: "assets/laminat.jpg",
+      images: [
+        "assets/assets/boden/1.jpg",
+        "assets/assets/boden/2.jpg",
+        "assets/assets/boden/3.jpg"
+      ]
+    },
+    {
+      key: "trockenbau",
+      title: "Trockenbau",
+      subtitle: "Wände, Decken, Akustik – exakte Ausführung.",
+      thumb: "assets/trockenbau/1.jpg",
+      images: [
+        "assets/assets/trockenbau/1.jpg",
+        "assets/assets/trockenbau/2.jpg",
+        "assets/assets/trockenbau/3.jpg"
+      ]
+    }
+  ];
+
+  const catGrid = document.getElementById("catGrid");
+  const modal = document.getElementById("modal");
+  const modalTitle = document.getElementById("modalTitle");
+  const galleryGrid = document.getElementById("galleryGrid");
+  const closeModalBtn = document.getElementById("closeModalBtn");
+
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lightboxImg");
+  const closeLightboxBtn = document.getElementById("closeLightboxBtn");
+
+  function renderCategories(){
+    catGrid.innerHTML = CATEGORIES.map(cat => `
+      <div class="pCard pWrap" data-key="${cat.key}">
+        <div class="pill">${cat.images.length} Bilder</div>
+        <div class="pThumb" style="background-image:url('${cat.thumb}')"></div>
+        <div class="pBody">
+          <h3>${cat.title}</h3>
+          <p>${cat.subtitle}</p>
+        </div>
+      </div>
+    `).join("");
+  }
+
+  function openGallery(catKey){
+    const cat = CATEGORIES.find(c => c.key === catKey);
+    if(!cat) return;
+
+    modalTitle.textContent = cat.title;
+    galleryGrid.innerHTML = cat.images.map(src => `
+      <div class="gItem" data-src="${src}">
+        <img class="gImg" src="${src}" alt="${cat.title}">
+      </div>
+    `).join("");
+
+    modal.classList.add("open");
+    modal.setAttribute("aria-hidden","false");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeGallery(){
+    modal.classList.remove("open");
+    modal.setAttribute("aria-hidden","true");
+    document.body.style.overflow = "";
+  }
+
+  function openLightbox(src){
+    lightboxImg.src = src;
+    lightbox.classList.add("open");
+    lightbox.setAttribute("aria-hidden","false");
+  }
+
+  function closeLightbox(){
+    lightbox.classList.remove("open");
+    lightbox.setAttribute("aria-hidden","true");
+    lightboxImg.src = "";
+  }
+
+  // events
+  renderCategories();
+
+  catGrid.addEventListener("click", (e) => {
+    const card = e.target.closest(".pCard");
+    if(!card) return;
+    openGallery(card.dataset.key);
+  });
+
+  closeModalBtn.addEventListener("click", closeGallery);
+  modal.addEventListener("click", (e) => {
+    if(e.target === modal) closeGallery();
+  });
+
+  galleryGrid.addEventListener("click", (e) => {
+    const item = e.target.closest(".gItem");
+    if(!item) return;
+    openLightbox(item.dataset.src);
+  });
+
+  closeLightboxBtn.addEventListener("click", closeLightbox);
+  lightbox.addEventListener("click", (e) => {
+    if(e.target === lightbox) closeLightbox();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if(e.key === "Escape"){
+      if(lightbox.classList.contains("open")) closeLightbox();
+      else if(modal.classList.contains("open")) closeGallery();
+    }
+  });
+
+  /* ✅ EXACT AS YOUR INDEX: burger toggle script */
+  const burger = document.querySelector(".burger");
+  if (burger) {
+    burger.addEventListener("click", () => {
+      const open = document.body.classList.toggle("menuOpen");
+      burger.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+  }
+</script>
+
+</body>
+</html>

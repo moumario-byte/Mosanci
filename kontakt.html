@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kontakt – Mosanci Innenausbau</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    *{box-sizing:border-box;}
+    body{
+      margin:0;
+      font-family:'Inter',sans-serif;
+      background:#ffffff;
+      color:#1f2328;
+    }
+    img{max-width:100%;height:auto;display:block;}
+    a{color:inherit;}
+    button{font-family:inherit;}
+
+    /* ================= FIXED HEADER (IDENTICAL TO INDEX) ================= */
+    .topHeader{
+      position:fixed;
+      top:0;
+      left:0;
+      right:0;
+      z-index:9999;
+      background:#ffffff;
+      height:92px;
+      display:flex;
+      align-items:center;
+      border-bottom:1px solid rgba(226,229,232,.9);
+      box-shadow:0 12px 28px rgba(0,0,0,.10);
+    }
+
+    .topHeader::after{
+      content:"";
+      position:absolute;
+      left:0;
+      right:0;
+      bottom:-38px;
+      height:38px;
+      pointer-events:none;
+      background:linear-gradient(to bottom, rgba(0,0,0,.22), rgba(0,0,0,0));
+      filter:blur(10px);
+      opacity:.35;
+    }
+
+    .navwrap{
+      width:min(1180px,100%);
+      margin:0 auto;
+      padding:0 16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+    }
+
+    .logoArea img{
+      height:69px;
+      width:auto;
+      display:block;
+    }
+
+    .nav{
+      list-style:none;
+      display:flex;
+      gap:12px;
+      margin:0;
+      padding:0;
+      align-items:center;
+    }
+
+    .nav a{
+      text-decoration:none;
+      font-weight:800;
+      color:#2e3338;
+      padding:12px 18px;
+      border-radius:1px;
+      background:#f1f3f5;
+      transition:.2s ease;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+    }
+    .nav a:hover{ background:#ff6a00; color:#fff; }
+    .nav a.active{ background:#b8302a; color:#fff; }
+    .chev{ font-size:12px; opacity:.85; transform:translateY(-1px); }
+
+    .rightArea{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      white-space:nowrap;
+    }
+
+    .login{
+      background:#1f2328;
+      color:#fff;
+      padding:12px 18px;
+      border-radius:0px;
+      text-decoration:none;
+      font-weight:900;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+    }
+    .login svg{ width:18px; height:18px; fill:#fff; }
+
+    .lang{
+      display:flex;
+      align-items:center;
+      gap:6px;
+      padding:12px 14px;
+      border-radius:1px;
+      border:1px solid #e2e5e8;
+      font-weight:800;
+      color:#2e3338;
+      cursor:pointer;
+    }
+    .flagDot{
+      width:18px;height:18px;border-radius:50%;
+      background:linear-gradient(#000 0 33%, #dd0000 33% 66%, #ffce00 66% 100%);
+    }
+
+    /* ================= PAGE CONTENT (IDENTICAL TO INDEX) ================= */
+    .pageContent{
+      padding-top:130px;
+      animation:fadeIn .18s ease;
+    }
+    @keyframes fadeIn{
+      from{opacity:0; transform:translateY(6px);}
+      to{opacity:1; transform:translateY(0);}
+    }
+
+    /* ================= CONTACT HERO ================= */
+    .contactHero{
+      padding:70px 20px 20px;
+      text-align:center;
+    }
+    .contactHero h1{
+      margin:0;
+      font-size:44px;
+      font-weight:900;
+      letter-spacing:.2px;
+    }
+    .contactHero p{
+      margin:14px auto 0;
+      max-width:780px;
+      color:#6f757c;
+      font-weight:700;
+      line-height:1.7;
+      font-size:13px;
+    }
+
+    /* ================= CONTACT INFO ================= */
+    .section{ padding:50px 20px; }
+    .inner{ max-width:1100px; margin:0 auto; }
+
+    .infoTitle{
+      text-align:center;
+      font-size:20px;
+      font-weight:900;
+      margin:10px 0 26px;
+    }
+
+    .infoGrid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:24px;
+    }
+
+    .infoCard{
+      background:#ffffff;
+      border-radius:12px;
+      padding:22px;
+      box-shadow:0 10px 25px rgba(0,0,0,.06);
+      border:1px solid #eef0f2;
+      display:flex;
+      gap:16px;
+      align-items:flex-start;
+    }
+
+    .iconBox{
+      width:50px;
+      height:50px;
+      border-radius:10px;
+      background:#ff6a00;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex:0 0 auto;
+      box-shadow:0 10px 20px rgba(0,0,0,.10);
+    }
+    .iconBox svg{ width:22px; height:22px; fill:#ffffff; }
+
+    .cardText h3{
+      margin:0 0 6px;
+      font-size:16px;
+      font-weight:900;
+    }
+    .mainLine{
+      font-weight:900;
+      margin-bottom:4px;
+      color:#1f2328;
+    }
+    .subLine{
+      color:#6f757c;
+      font-size:13px;
+      font-weight:700;
+    }
+
+    /* ================= FORM + TRUST ================= */
+    .twoCol{
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:26px;
+      margin-top:26px;
+    }
+
+    .panel{
+      background:#ffffff;
+      border:1px solid #eef0f2;
+      border-radius:14px;
+      padding:22px;
+      box-shadow:0 12px 28px rgba(0,0,0,.08);
+    }
+
+    .panel h2{
+      margin:0 0 8px;
+      font-size:20px;
+      font-weight:900;
+    }
+    .panel p{
+      margin:0 0 16px;
+      color:#6f757c;
+      font-weight:700;
+      line-height:1.65;
+      font-size:13px;
+    }
+
+    .formGrid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+    }
+    .field{ display:flex; flex-direction:column; gap:8px; }
+    .field label{
+      font-weight:900;
+      color:#2e3338;
+      font-size:12px;
+    }
+    .field input, .field select, .field textarea{
+      border:1px solid #e2e5e8;
+      border-radius:10px;
+      padding:12px 12px;
+      font-weight:700;
+      outline:none;
+      transition:.15s ease;
+      background:#fff;
+    }
+    .field input:focus, .field select:focus, .field textarea:focus{
+      border-color:#ff6a00;
+      box-shadow:0 0 0 3px rgba(255,106,0,.14);
+    }
+    .field textarea{ resize:vertical; min-height:120px; grid-column:1 / -1; }
+
+    .formActions{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-top:14px;
+      flex-wrap:wrap;
+    }
+    .btn{
+      border:none;
+      cursor:pointer;
+      background:#ff6a00;
+      color:#fff;
+      padding:12px 18px;
+      border-radius:10px;
+      font-weight:900;
+      transition:.2s ease;
+    }
+    .btn:hover{ background:#e65c00; }
+    .note{
+      color:#6f757c;
+      font-weight:800;
+      font-size:12px;
+    }
+
+    .trustList{
+      list-style:none;
+      padding:0;
+      margin:12px 0 0;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .trustItem{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      padding:12px 12px;
+      border:1px solid #eef0f2;
+      border-radius:12px;
+      background:#fff;
+    }
+    .tick{
+      width:30px;height:30px;border-radius:10px;
+      background:rgba(255,106,0,.12);
+      display:flex;align-items:center;justify-content:center;
+      flex:0 0 auto;
+    }
+    .tick svg{ width:18px;height:18px; fill:#ff6a00; }
+    .trustText strong{ display:block; font-weight:900; }
+    .trustText span{
+      display:block;
+      margin-top:2px;
+      color:#6f757c;
+      font-weight:700;
+      font-size:12px;
+      line-height:1.5;
+    }
+
+    /* ================= STEPS ================= */
+    .stepsGrid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:16px;
+      margin-top:14px;
+    }
+    .step{
+      background:#ffffff;
+      border:1px solid #eef0f2;
+      border-radius:14px;
+      padding:16px;
+      box-shadow:0 10px 22px rgba(0,0,0,.06);
+    }
+    .stepTop{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin-bottom:8px;
+    }
+    .stepNum{
+      width:36px;height:36px;border-radius:12px;
+      background:#ff6a00;
+      color:#fff;
+      display:flex;align-items:center;justify-content:center;
+      font-weight:900;
+      box-shadow:0 10px 18px rgba(0,0,0,.10);
+    }
+    .step h3{ margin:0; font-size:14px; font-weight:900; }
+    .step p{
+      margin:8px 0 0;
+      color:#6f757c;
+      font-weight:700;
+      font-size:12px;
+      line-height:1.65;
+    }
+
+    /* ================= CTA ================= */
+    .cta{
+      background:#1f2328;
+      color:#fff;
+      padding:48px 20px;
+      border-radius:14px;
+      text-align:center;
+      margin-top:30px;
+      box-shadow:0 18px 45px rgba(0,0,0,.12);
+    }
+    .cta h2{ margin:0 0 10px; font-size:26px; font-weight:900; }
+    .cta p{
+      margin:0 auto 16px;
+      max-width:820px;
+      color:rgba(255,255,255,.92);
+      font-weight:700;
+      line-height:1.6;
+      font-size:13px;
+    }
+    .cta a{
+      display:inline-block;
+      background:#ff6a00;
+      color:#fff;
+      padding:12px 20px;
+      border-radius:10px;
+      font-weight:900;
+      text-decoration:none;
+      transition:.2s ease;
+    }
+    .cta a:hover{ background:#e65c00; }
+
+    /* ================= FOOTER (IDENTICAL STRUCTURE TO INDEX) ================= */
+    footer{
+      background:#25272a;
+      color:#f1f3f5;
+      margin-top:0;
+    }
+    .footerTop{
+      max-width:1100px;
+      margin:0 auto;
+      padding:60px 20px;
+      display:grid;
+      grid-template-columns:1.3fr 1fr 1fr;
+      gap:40px;
+    }
+    .footerBrand h3{ margin:0; font-weight:900; }
+    .footerBrand p{
+      margin-top:12px;
+      line-height:1.6;
+      color:#cfd3d7;
+      font-weight:500;
+    }
+    .footerCol h4{ margin:0 0 15px; font-weight:900; }
+
+    .footer-contact{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin-bottom:12px;
+      color:#cfd3d7;
+      font-weight:600;
+      text-decoration:none;
+    }
+    .footer-contact svg{
+      width:16px;
+      height:16px;
+      fill:#cfd3d7;
+      flex:0 0 16px;
+    }
+
+    .footerCol a.link{
+      display:block;
+      margin-bottom:10px;
+      color:#cfd3d7;
+      text-decoration:none;
+      font-weight:600;
+      transition:.2s ease;
+    }
+    .footerCol a.link:hover{ color:#fff; }
+
+    .footerBottom{
+      border-top:1px solid rgba(255,255,255,.08);
+      text-align:center;
+      padding:20px;
+      font-size:13px;
+      color:#9ca3af;
+      font-weight:600;
+    }
+
+    /* ================= EXISTING RESPONSIVE (LIKE INDEX) ================= */
+    @media (max-width:980px){
+      .topHeader{ height:auto; padding:12px 0; }
+      .navwrap{ flex-wrap:wrap; justify-content:center; }
+      .nav{ flex-wrap:wrap; justify-content:center; }
+      .pageContent{ padding-top:140px; }
+      .footerTop{ grid-template-columns:1fr; }
+      .infoGrid{ grid-template-columns:1fr; }
+      .twoCol{ grid-template-columns:1fr; }
+      .stepsGrid{ grid-template-columns:1fr 1fr; }
+    }
+
+    /* ================= Mobile header like ausbau.nrw (IDENTICAL TO INDEX) ================= */
+    .mobileActions{ display:none; }
+
+    @media (max-width:700px){
+      .nav, .rightArea { display:none; }
+
+      .topHeader{
+        height:72px;
+        padding:0;
+      }
+      .navwrap{
+        width:100%;
+        padding:0 14px;
+        flex-wrap:nowrap;
+        justify-content:space-between;
+      }
+      .logoArea img{ height:44px; }
+
+      .mobileActions{
+        display:flex;
+        align-items:center;
+        gap:10px;
+      }
+
+      .langPill{
+        display:inline-flex;
+        align-items:center;
+        gap:8px;
+        padding:10px 12px;
+        background:#fff;
+        border:1px solid #e2e5e8;
+        font-weight:800;
+        border-radius:10px;
+        cursor:pointer;
+      }
+
+      .burger{
+        width:44px;
+        height:44px;
+        border:1px solid #e2e5e8;
+        background:#fff;
+        border-radius:10px;
+        display:inline-flex;
+        flex-direction:column;
+        justify-content:center;
+        gap:6px;
+        padding:0 12px;
+        cursor:pointer;
+      }
+      .burger span{
+        display:block;
+        height:2px;
+        background:#1f2328;
+        border-radius:2px;
+      }
+
+      .mobileMenu{
+        position:fixed;
+        top:72px;
+        left:0;
+        right:0;
+        background:#fff;
+        border-top:1px solid #eef0f2;
+        box-shadow:0 18px 50px rgba(0,0,0,.14);
+        transform:translateY(-8px);
+        opacity:0;
+        pointer-events:none;
+        transition:.18s ease;
+        z-index:9998;
+        padding:12px;
+        display:grid;
+        gap:10px;
+      }
+      .mobileMenu a{
+        padding:14px 14px;
+        background:#f1f3f5;
+        border-radius:12px;
+        font-weight:900;
+        text-decoration:none;
+        color:#1f2328;
+        text-align:center;
+      }
+      .mobileMenu a:active{ transform:scale(.99); }
+      .mobileMenu .mobileLogin{
+        background:#1f2328;
+        color:#fff;
+      }
+
+      body.menuOpen .mobileMenu{
+        transform:translateY(0);
+        opacity:1;
+        pointer-events:auto;
+      }
+
+      .pageContent{ padding-top:105px; }
+      .contactHero{ padding:40px 16px 10px; }
+      .contactHero h1{ font-size:32px; line-height:1.1; }
+    }
+
+    @media (max-width:560px){
+      .formGrid{ grid-template-columns:1fr; }
+      .stepsGrid{ grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="topHeader">
+    <div class="navwrap">
+      <div class="logoArea">
+        <img src="logo.png" alt="Mosanci Innenausbau">
+      </div>
+
+      <!-- Desktop NAV -->
+      <ul class="nav">
+        <li><a href="index.html">Startseite</a></li>
+        <li><a href="ueber-uns.html">Über uns <span class="chev">▾</span></a></li>
+        <li><a href="dienstleistungen.html">Dienstleistungen <span class="chev">▾</span></a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a class="active" href="kontakt.html">Kontakt</a></li>
+      </ul>
+
+      <!-- Desktop right area -->
+      <div class="rightArea">
+        <a class="login" href="#">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 12a4.5 4.5 0 1 0-4.5-4.5A4.5 4.5 0 0 0 12 12Zm0 2c-4.42 0-8 2.24-8 5v1h16v-1c0-2.76-3.58-5-8-5Z"/>
+          </svg>
+          Login
+        </a>
+
+        <div class="lang">
+          <span class="flagDot" aria-hidden="true"></span>
+          <span>DE</span>
+          <span class="chev">▾</span>
+        </div>
+      </div>
+
+      <!-- Mobile actions -->
+      <div class="mobileActions">
+        <button class="langPill" type="button" aria-label="Sprache">
+          <span class="flagDot" aria-hidden="true"></span>
+          <span>DE</span>
+          <span class="chev">▾</span>
+        </button>
+
+        <button class="burger" type="button" aria-label="Menü öffnen" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile menu drawer -->
+  <nav class="mobileMenu" aria-label="Mobile Navigation">
+    <a href="index.html">Startseite</a>
+    <a href="ueber-uns.html">Über uns</a>
+    <a href="dienstleistungen.html">Dienstleistungen</a>
+    <a href="portfolio.html">Portfolio</a>
+    <a href="kontakt.html">Kontakt</a>
+    <a class="mobileLogin" href="#">Login</a>
+  </nav>
+
+  <!-- PAGE CONTENT -->
+  <div class="pageContent">
+
+    <section class="contactHero">
+      <h1>Kontakt</h1>
+      <p>
+        Haben Sie Fragen zu unseren Dienstleistungen oder möchten Sie ein unverbindliches Angebot erhalten?
+        Nehmen Sie gerne Kontakt mit uns auf!
+      </p>
+    </section>
+
+    <section class="section" style="padding-top:20px;">
+      <div class="inner">
+
+        <div class="infoTitle">Kontaktinformationen</div>
+
+        <div class="infoGrid">
+          <div class="infoCard">
+            <div class="iconBox">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V21a1 1 0 0 1-1 1C10.85 22 2 13.15 2 2a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.24.2 2.45.57 3.57a1 1 0 0 1-.25 1.02l-2.2 2.2Z"/>
+              </svg>
+            </div>
+            <div class="cardText">
+              <h3>Telefon</h3>
+              <div class="mainLine">+49 (0) 2452 8607038</div>
+              <div class="subLine">Mo–Fr: 7:00 – 17:00 Uhr</div>
+            </div>
+          </div>
+
+          <div class="infoCard">
+            <div class="iconBox">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4-8 5L4 8V6l8 5 8-5Z"/>
+              </svg>
+            </div>
+            <div class="cardText">
+              <h3>E-Mail</h3>
+              <div class="mainLine">kontakt@mosanci.de</div>
+              <div class="subLine">Antwort meist innerhalb von 24h</div>
+            </div>
+          </div>
+
+          <div class="infoCard">
+            <div class="iconBox">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Z"/>
+              </svg>
+            </div>
+            <div class="cardText">
+              <h3>Adresse</h3>
+              <div class="mainLine">Am Diebsweg 17</div>
+              <div class="subLine">52525 Heinsberg</div>
+            </div>
+          </div>
+
+          <div class="infoCard">
+            <div class="iconBox">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 1a11 11 0 1 0 11 11A11 11 0 0 0 12 1Zm1 11H6V10h5V5h2v7Z"/>
+              </svg>
+            </div>
+            <div class="cardText">
+              <h3>Öffnungszeiten</h3>
+              <div class="mainLine">Mo–Fr: 7:00 – 17:00</div>
+              <div class="subLine">Samstag nach Vereinbarung</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="twoCol">
+          <div class="panel">
+            <h2>Anfrage senden</h2>
+            <p>Füllen Sie das Formular kurz aus – wir melden uns schnell zurück.</p>
+
+            <form action="#" method="post">
+              <div class="formGrid">
+                <div class="field">
+                  <label for="name">Name*</label>
+                  <input id="name" name="name" type="text" placeholder="Ihr Name" required>
+                </div>
+
+                <div class="field">
+                  <label for="email">E-Mail*</label>
+                  <input id="email" name="email" type="email" placeholder="Ihre E-Mail" required>
+                </div>
+
+                <div class="field">
+                  <label for="phone">Telefon</label>
+                  <input id="phone" name="phone" type="tel" placeholder="+49 ...">
+                </div>
+
+                <div class="field">
+                  <label for="service">Leistung*</label>
+                  <select id="service" name="service" required>
+                    <option value="" selected disabled>Bitte auswählen</option>
+                    <option>Fliesenarbeit</option>
+                    <option>Malerarbeit</option>
+                    <option>Trockenbau</option>
+                    <option>Bodenverlegung</option>
+                    <option>Innentürmontage</option>
+                    <option>Renovierung</option>
+                    <option>Isolierung</option>
+                    <option>Sonstiges</option>
+                  </select>
+                </div>
+
+                <div class="field" style="grid-column:1 / -1;">
+                  <label for="message">Nachricht*</label>
+                  <textarea id="message" name="message" placeholder="Kurze Beschreibung Ihres Projekts (Ort, Zeitraum, Wunschleistung)..." required></textarea>
+                </div>
+              </div>
+
+              <div class="formActions">
+                <button class="btn" type="submit">Anfrage absenden</button>
+                <div class="note">* Pflichtfelder · Antwort meist innerhalb von 24h</div>
+              </div>
+            </form>
+          </div>
+
+          <div class="panel">
+            <h2>Warum Mosanci?</h2>
+            <p>Qualität, Sauberkeit und zuverlässige Termine – damit Ihr Projekt stressfrei läuft.</p>
+
+            <ul class="trustList">
+              <li class="trustItem">
+                <div class="tick" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12 3.4 13.4 9 19 21 7 19.6 5.6 9 16.2Z"/></svg>
+                </div>
+                <div class="trustText">
+                  <strong>Saubere Arbeit</strong>
+                  <span>Ordnung auf der Baustelle &amp; saubere Übergänge.</span>
+                </div>
+              </li>
+
+              <li class="trustItem">
+                <div class="tick" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12 3.4 13.4 9 19 21 7 19.6 5.6 9 16.2Z"/></svg>
+                </div>
+                <div class="trustText">
+                  <strong>Transparente Angebote</strong>
+                  <span>Klare Leistungen, fair kalkuliert – ohne Überraschungen.</span>
+                </div>
+              </li>
+
+              <li class="trustItem">
+                <div class="tick" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12 3.4 13.4 9 19 21 7 19.6 5.6 9 16.2Z"/></svg>
+                </div>
+                <div class="trustText">
+                  <strong>Schnelle Rückmeldung</strong>
+                  <span>Wir antworten in der Regel innerhalb von 24 Stunden.</span>
+                </div>
+              </li>
+
+              <li class="trustItem">
+                <div class="tick" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12 3.4 13.4 9 19 21 7 19.6 5.6 9 16.2Z"/></svg>
+                </div>
+                <div class="trustText">
+                  <strong>Termintreue</strong>
+                  <span>Planung und Umsetzung – zuverlässig und pünktlich.</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="panel" style="margin-top:26px;">
+          <h2>So läuft Ihr Projekt ab</h2>
+          <p>Ein klarer Ablauf – schnell, transparent und ohne Stress.</p>
+
+          <div class="stepsGrid">
+            <div class="step">
+              <div class="stepTop">
+                <div class="stepNum">1</div>
+                <h3>Anfrage</h3>
+              </div>
+              <p>Sie senden uns Ihre Anfrage per Formular, Telefon oder E-Mail.</p>
+            </div>
+
+            <div class="step">
+              <div class="stepTop">
+                <div class="stepNum">2</div>
+                <h3>Beratung</h3>
+              </div>
+              <p>Kurze Rücksprache – wir klären Wünsche, Maße &amp; Zeitraum.</p>
+            </div>
+
+            <div class="step">
+              <div class="stepTop">
+                <div class="stepNum">3</div>
+                <h3>Angebot</h3>
+              </div>
+              <p>Sie erhalten ein transparentes Angebot (unverbindlich).</p>
+            </div>
+
+            <div class="step">
+              <div class="stepTop">
+                <div class="stepNum">4</div>
+                <h3>Umsetzung</h3>
+              </div>
+              <p>Wir starten zum vereinbarten Termin – sauber &amp; professionell.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="cta">
+          <h2>Projekt starten?</h2>
+          <p>Kontaktieren Sie uns jetzt – wir beraten Sie kostenlos und erstellen ein unverbindliches Angebot.</p>
+          <a href="tel:+4924528607038">Jetzt anrufen</a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footerTop">
+        <div class="footerBrand">
+          <h3>Mosanci Innenausbau</h3>
+          <p>Ihr Partner für professionellen Innenausbau &amp; Renovierung. Qualität und Präzision seit Jahren.</p>
+        </div>
+
+        <div class="footerCol">
+          <h4>Kontakt</h4>
+
+          <a class="footer-contact" href="tel:+4924528607038">
+            <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V21a1 1 0 0 1-1 1C10.85 22 2 13.15 2 2a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.24.2 2.45.57 3.57a1 1 0 0 1-.25 1.02l-2.2 2.2Z"/></svg>
+            +49 (0) 2452 8607038
+          </a>
+
+          <a class="footer-contact" href="mailto:info@mosanci.de">
+            <svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4-8 5L4 8V6l8 5 8-5Z"/></svg>
+            info@mosanci.de
+          </a>
+
+          <div class="footer-contact" style="cursor:default;">
+            <svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Z"/></svg>
+            Am Diebsweg 17, 52525 Heinsberg
+          </div>
+        </div>
+
+        <div class="footerCol">
+          <h4>Quick Links</h4>
+          <a class="link" href="ueber-uns.html">Über uns</a>
+          <a class="link" href="dienstleistungen.html">Dienstleistungen</a>
+          <li><a href="porfolio.html">Portfolio</a></li>
+          <a class="link" href="kontakt.html">Kontakt</a>
+          <a class="link" href="#">Impressum &amp; Datenschutz</a>
+        </div>
+      </div>
+
+      <div class="footerBottom">
+        © 2025 Mosanci Innenausbau. Alle Rechte vorbehalten.
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Mobile menu toggle (IDENTICAL TO INDEX) -->
+  <script>
+    const burger = document.querySelector(".burger");
+    if (burger) {
+      burger.addEventListener("click", () => {
+        const open = document.body.classList.toggle("menuOpen");
+        burger.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+    }
+  </script>
+
+</body>
+</html>

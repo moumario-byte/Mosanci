@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Innentürmontage – Mosanci Innenausbau</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    *{box-sizing:border-box;}
+    body{
+      margin:0;
+      font-family:'Inter',sans-serif;
+      background:#ffffff;
+      color:#1f2328;
+    }
+    img{max-width:100%;height:auto;display:block;}
+
+    /* ================= FIXED HEADER (EXACT LIKE INDEX) ================= */
+    .topHeader{
+      position:fixed;
+      top:0;
+      left:0;
+      right:0;
+      z-index:9999;
+      background:#ffffff;
+      height:92px;
+      display:flex;
+      align-items:center;
+      border-bottom:1px solid rgba(226,229,232,.9);
+      box-shadow:0 12px 28px rgba(0,0,0,.10);
+    }
+    .topHeader::after{
+      content:"";
+      position:absolute;
+      left:0;
+      right:0;
+      bottom:-38px;
+      height:38px;
+      pointer-events:none;
+      background:linear-gradient(to bottom, rgba(0,0,0,.22), rgba(0,0,0,0));
+      filter:blur(10px);
+      opacity:.35;
+    }
+
+    .navwrap{
+      width:min(1180px,100%);
+      margin:0 auto;
+      padding:0 16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+    }
+    .logoArea img{
+      height:69px;
+      width:auto;
+      display:block;
+    }
+
+    .nav{
+      list-style:none;
+      display:flex;
+      gap:12px;
+      margin:0;
+      padding:0;
+      align-items:center;
+    }
+    .nav a{
+      text-decoration:none;
+      font-weight:800;
+      color:#2e3338;
+      padding:12px 18px;
+      border-radius:1px;
+      background:#f1f3f5;
+      transition:.2s ease;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+    }
+    .nav a:hover{ background:#ff6a00; color:#fff; }
+    .nav a.active{ background:#b8302a; color:#fff; }
+    .chev{ font-size:12px; opacity:.85; transform:translateY(-1px); }
+
+    .rightArea{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      white-space:nowrap;
+    }
+    .login{
+      background:#1f2328;
+      color:#fff;
+      padding:12px 18px;
+      border-radius:0px;
+      text-decoration:none;
+      font-weight:900;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+    }
+    .login svg{ width:18px; height:18px; fill:#fff; }
+
+    .lang{
+      display:flex;
+      align-items:center;
+      gap:6px;
+      padding:12px 14px;
+      border-radius:1px;
+      border:1px solid #e2e5e8;
+      font-weight:800;
+      color:#2e3338;
+      cursor:pointer;
+    }
+    .flagDot{
+      width:18px;height:18px;border-radius:50%;
+      background:linear-gradient(#000 0 33%, #dd0000 33% 66%, #ffce00 66% 100%);
+    }
+
+    /* ================= PAGE CONTENT OFFSET (LIKE INDEX) ================= */
+    .pageContent{
+      padding-top:130px;
+      animation:fadeIn .18s ease;
+    }
+    @keyframes fadeIn{
+      from{opacity:0; transform:translateY(6px);}
+      to{opacity:1; transform:translateY(0);}
+    }
+
+    /* ================= RESPONSIVE (LIKE INDEX) ================= */
+    @media(max-width:980px){
+      .topHeader{ height:auto; padding:12px 0; }
+      .navwrap{ flex-wrap:wrap; justify-content:center; }
+      .nav{ flex-wrap:wrap; justify-content:center; }
+      .pageContent{ padding-top:140px; }
+    }
+
+    /* ================= PAGE STYLES (CLEAN, READABLE) ================= */
+    .section{ padding:48px 20px; }
+    .inner{ max-width:1100px; margin:0 auto; }
+
+    .breadcrumbs{
+      text-align:center;
+      color:#6f757c;
+      font-weight:700;
+      font-size:13px;
+      margin:6px 0 18px;
+    }
+    .breadcrumbs a{ color:#6f757c; text-decoration:none; }
+    .breadcrumbs a:hover{ text-decoration:underline; }
+
+    .pageHead{
+      text-align:center;
+      padding:8px 0 10px;
+    }
+    .titleRow{
+      display:inline-flex;
+      align-items:center;
+      gap:12px;
+    }
+    .titleIcon{
+      width:52px;
+      height:52px;
+      border-radius:12px;
+      background:#1f2328;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex:0 0 auto;
+    }
+    .titleIcon svg{ width:24px; height:24px; fill:#fff; }
+
+    .pageHead h1{
+      margin:0;
+      font-size:42px;
+      font-weight:900;
+      color:#1f2328;
+    }
+    .pageHead p{
+      margin:14px auto 0;
+      max-width:900px;
+      color:#6f757c;
+      line-height:1.75;
+      font-weight:600;
+      font-size:16px;
+    }
+
+    .heroImage{
+      max-width:920px;
+      margin:26px auto 0;
+      border-radius:14px;
+      overflow:hidden;
+      box-shadow:0 18px 45px rgba(0,0,0,.12);
+      border:1px solid #eef0f2;
+    }
+    .heroImage img{
+      width:100%;
+      height:340px;
+      object-fit:cover;
+      display:block;
+    }
+
+    .sectionTitle{
+      text-align:center;
+      font-size:26px;
+      font-weight:900;
+      margin:44px 0 22px;
+      color:#1f2328;
+    }
+
+    /* Overview */
+    .overviewRow{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0,1fr));
+      gap:22px;
+      margin-top:10px;
+    }
+    .ovItem{
+      background:#ffffff;
+      border:1px solid #eef0f2;
+      border-radius:14px;
+      padding:22px 18px;
+      box-shadow:0 10px 22px rgba(0,0,0,.06);
+      text-align:center;
+    }
+    .ovIcon{
+      width:54px;
+      height:54px;
+      border-radius:14px;
+      background:#1f2328;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      margin:0 auto 14px;
+      box-shadow:0 10px 22px rgba(0,0,0,.10);
+    }
+    .ovIcon svg{ width:24px; height:24px; fill:#fff; }
+    .ovItem h4{
+      margin:0 0 8px;
+      font-size:15px;
+      font-weight:900;
+      color:#1f2328;
+    }
+    .ovItem p{
+      margin:0;
+      color:#6f757c;
+      font-weight:700;
+      font-size:14px;
+      line-height:1.6;
+    }
+
+    /* Types */
+    .blockTitle{
+      text-align:center;
+      font-size:28px;
+      font-weight:900;
+      margin:60px 0 18px;
+      color:#1f2328;
+    }
+    .blockSub{
+      text-align:center;
+      max-width:900px;
+      margin:0 auto 30px;
+      color:#6f757c;
+      font-weight:700;
+      font-size:15px;
+      line-height:1.7;
+    }
+
+    .typeGrid{ display:grid; gap:28px; margin-top:18px; }
+    .typeRow{
+      display:grid;
+      grid-template-columns: 420px 1fr;
+      gap:26px;
+      align-items:center;
+    }
+    .typeRow.reverse{ grid-template-columns: 1fr 420px; }
+
+    .typeCardImg{
+      border-radius:14px;
+      overflow:hidden;
+      border:1px solid #eef0f2;
+      box-shadow:0 12px 30px rgba(0,0,0,.08);
+    }
+    .typeCardImg img{
+      width:100%;
+      height:230px;
+      object-fit:cover;
+      display:block;
+    }
+    .typeText h3{
+      margin:0 0 8px;
+      font-size:20px;
+      font-weight:900;
+      color:#1f2328;
+    }
+    .typeText p{
+      margin:0 0 12px;
+      color:#6f757c;
+      font-weight:700;
+      font-size:15px;
+      line-height:1.7;
+    }
+
+    .materialsTitle{
+      font-weight:900;
+      font-size:14px;
+      margin:10px 0 8px;
+      color:#1f2328;
+    }
+
+    .materials{
+      margin:0;
+      padding:0;
+      list-style:none;
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0, 1fr));
+      gap:10px 18px;
+    }
+    .materials li{
+      display:flex;
+      align-items:flex-start;
+      gap:10px;
+      font-weight:800;
+      font-size:14px;
+      color:#2e3338;
+      line-height:1.4;
+    }
+    .dot{
+      width:7px; height:7px; border-radius:50%;
+      background:#b8302a;
+      margin-top:7px;
+      flex:0 0 auto;
+    }
+
+    /* Highlight box */
+    .highlightBox{
+      background:#f2fbf9;
+      border:1px solid #e8f3f1;
+      border-radius:14px;
+      padding:34px 26px;
+      margin-top:40px;
+    }
+    .highlightTitle{
+      text-align:center;
+      font-size:22px;
+      font-weight:900;
+      margin:0 0 22px;
+      color:#1f2328;
+    }
+    .highlightGrid{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:16px 22px;
+    }
+    .hItem{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      font-weight:800;
+      font-size:14px;
+      color:#2e3338;
+      line-height:1.55;
+    }
+    .hCheck{
+      width:18px;
+      height:18px;
+      border-radius:50%;
+      background:#ffffff;
+      border:1px solid #dfe9e7;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex:0 0 auto;
+      transform:translateY(2px);
+    }
+    .hCheck svg{ width:12px; height:12px; fill:#2b2f33; }
+
+    /* Process */
+    .processTitle{
+      text-align:center;
+      font-size:26px;
+      font-weight:900;
+      margin:60px 0 30px;
+      color:#1f2328;
+    }
+    .processSteps{
+      display:flex;
+      justify-content:center;
+      gap:70px;
+      flex-wrap:wrap;
+      padding-bottom:10px;
+    }
+    .pStep{
+      max-width:180px;
+      text-align:center;
+    }
+    .pCircle{
+      width:56px;
+      height:56px;
+      border-radius:50%;
+      background:#ff6a00;
+      color:#ffffff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:900;
+      margin:0 auto 14px;
+      box-shadow:0 10px 22px rgba(255,106,0,.25);
+    }
+    .pStep h4{
+      margin:0 0 8px;
+      font-weight:900;
+      font-size:15px;
+      color:#1f2328;
+    }
+    .pStep p{
+      margin:0;
+      color:#6f757c;
+      font-weight:700;
+      font-size:13px;
+      line-height:1.55;
+    }
+
+    /* CTA */
+    .bigCtaWrap{ padding:10px 20px 70px; }
+    .bigCta{
+      max-width:1100px;
+      margin:0 auto;
+      background:#2f5557;
+      border-radius:14px;
+      padding:44px 24px;
+      text-align:center;
+      color:#ffffff;
+      box-shadow:0 18px 45px rgba(0,0,0,.12);
+    }
+    .bigCta h3{
+      margin:0 0 10px;
+      font-size:26px;
+      font-weight:900;
+    }
+    .bigCta p{
+      margin:0 auto 18px;
+      max-width:820px;
+      color:rgba(255,255,255,.92);
+      font-weight:700;
+      line-height:1.7;
+      font-size:15px;
+    }
+    .bigCta a{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      background:#ffffff;
+      color:#1f2328;
+      padding:12px 18px;
+      border-radius:6px;
+      font-weight:900;
+      text-decoration:none;
+      transition:.2s ease;
+    }
+    .bigCta a:hover{ opacity:.92; }
+    .bigCta a svg{ width:18px; height:18px; fill:#1f2328; }
+
+    /* ================= FOOTER (MATCH YOUR STYLE) ================= */
+    footer{
+      background:#25272a;
+      color:#f1f3f5;
+      margin-top:0;
+    }
+    .footerTop{
+      max-width:1100px;
+      margin:0 auto;
+      padding:60px 20px;
+      display:grid;
+      grid-template-columns:1.3fr 1fr 1fr;
+      gap:40px;
+    }
+    .footerBrand h3{ margin:0; font-weight:900; }
+    .footerBrand p{
+      margin-top:12px;
+      line-height:1.6;
+      color:#cfd3d7;
+      font-weight:500;
+    }
+    .footerCol h4{ margin:0 0 15px; font-weight:900; }
+    .footerCol a{
+      display:block;
+      margin-bottom:10px;
+      color:#cfd3d7;
+      text-decoration:none;
+      font-weight:600;
+      transition:color .2s ease;
+    }
+    .footerCol a:hover{ color:#ffffff; }
+    .footerBottom{
+      border-top:1px solid rgba(255,255,255,.08);
+      text-align:center;
+      padding:20px;
+      font-size:13px;
+      color:#9ca3af;
+      font-weight:600;
+    }
+
+    /* ================= RESPONSIVE ================= */
+    @media (max-width: 980px){
+      /* header stays index-like via existing media query above */
+      .overviewRow{ grid-template-columns:1fr; }
+    }
+    @media (max-width: 920px){
+      .typeRow, .typeRow.reverse{ grid-template-columns:1fr; }
+      .heroImage img{ height:260px; }
+      .highlightGrid{ grid-template-columns:1fr; }
+      .processSteps{ gap:32px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER (EXACT LIKE INDEX) -->
+  <header class="topHeader">
+    <div class="navwrap">
+      <div class="logoArea">
+        <img src="logo.png" alt="Mosanci Innenausbau">
+      </div>
+
+      <ul class="nav">
+        <li><a href="index.html">Startseite</a></li>
+        <li><a href="ueber-uns.html">Über uns <span class="chev">▾</span></a></li>
+        <li><a class="active" href="dienstleistungen.html">Dienstleistungen <span class="chev">▾</span></a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="kontakt.html">Kontakt</a></li>
+      </ul>
+
+      <div class="rightArea">
+        <a class="login" href="#">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 12a4.5 4.5 0 1 0-4.5-4.5A4.5 4.5 0 0 0 12 12Zm0 2c-4.42 0-8 2.24-8 5v1h16v-1c0-2.76-3.58-5-8-5Z"/>
+          </svg>
+          Login
+        </a>
+
+        <div class="lang">
+          <span class="flagDot" aria-hidden="true"></span>
+          <span>DE</span>
+          <span class="chev">▾</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="pageContent">
+
+    <div class="breadcrumbs">
+      <a href="index.html">Startseite</a> &nbsp;/&nbsp;
+      <a href="dienstleistungen.html">Dienstleistungen</a> &nbsp;/&nbsp;
+      Innentürmontage
+    </div>
+
+    <section class="section">
+      <div class="inner">
+
+        <div class="pageHead">
+          <div class="titleRow">
+            <div class="titleIcon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 3 2 9v12h7v-7h6v7h7V9l-10-6Zm-1 16H6v-8.1l6-3.6 6 3.6V19h-5v-7h-2v7Z"/>
+              </svg>
+            </div>
+            <h1>Innentürmontage</h1>
+          </div>
+
+          <p>
+            Fachgerechte Montage von Innentüren aller Art. Von klassischen Zimmertüren bis zu modernen
+            Designlösungen – wir sorgen für perfekte Passform, saubere Fugen und leichtgängige Funktion.
+          </p>
+
+          <div class="heroImage">
+            <img src="assets/door-hero.jpg" alt="Innentürmontage">
+          </div>
+        </div>
+
+        <div class="sectionTitle">Unsere Leistungen im Überblick</div>
+        <div class="overviewRow">
+          <div class="ovItem">
+            <div class="ovIcon">
+              <svg viewBox="0 0 24 24"><path d="M19.4 13a7.9 7.9 0 0 0 .1-1 7.9 7.9 0 0 0-.1-1l2-1.6-2-3.4-2.4 1a8.4 8.4 0 0 0-1.7-1L15 2h-4l-.3 2.9a8.4 8.4 0 0 0-1.7 1l-2.4-1-2 3.4L6.6 11a7.9 7.9 0 0 0-.1 1 7.9 7.9 0 0 0 .1 1l-2 1.6 2 3.4 2.4-1a8.4 8.4 0 0 0 1.7 1L11 22h4l.3-2.9a8.4 8.4 0 0 0 1.7-1l2.4 1 2-3.4-2-1.6ZM12 15a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z"/></svg>
+            </div>
+            <h4>Professionelle Montage</h4>
+            <p>Exakt ausgerichtete Zargen, sauber eingestellt – Tür läuft perfekt.</p>
+          </div>
+
+          <div class="ovItem">
+            <div class="ovIcon">
+              <svg viewBox="0 0 24 24"><path d="M12 5c5 0 9.3 3.1 11 7-1.7 3.9-6 7-11 7S2.7 15.9 1 12c1.7-3.9 6-7 11-7Zm0 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z"/></svg>
+            </div>
+            <h4>Passgenau & sauber</h4>
+            <p>Spaltmaße, Bänder, Schloss – alles präzise und optisch stimmig.</p>
+          </div>
+
+          <div class="ovItem">
+            <div class="ovIcon">
+              <svg viewBox="0 0 24 24"><path d="M12 2 3 6v6c0 5 3.8 9.7 9 10 5.2-.3 9-5 9-10V6l-9-4Zm0 6.2 5 2.2V12c0 3.1-2.3 6.4-5 6.8-2.7-.4-5-3.7-5-6.8v-1.6l5-2.2Z"/></svg>
+            </div>
+            <h4>Hochwertige Materialien</h4>
+            <p>Bewährte Beschläge, stabile Zargen – für lange Lebensdauer.</p>
+          </div>
+        </div>
+
+        <div class="blockTitle">Türarten und Materialien</div>
+        <div class="blockSub">
+          Ob klassisch, modern oder platzsparend: Wir montieren Türen fachgerecht – inklusive Zarge, Beschlägen und Feineinstellung.
+        </div>
+
+        <div class="typeGrid">
+          <div class="typeRow">
+            <div class="typeCardImg">
+              <img src="assets/door-zimmertuer.jpg" alt="Zimmertüren">
+            </div>
+            <div class="typeText">
+              <h3>Zimmertüren</h3>
+              <p>Klassische Drehtüren in verschiedenen Designs – ideal für Wohn- und Schlafräume.</p>
+              <div class="materialsTitle">Verfügbare Materialien:</div>
+              <ul class="materials">
+                <li><span class="dot"></span>Massivholz</li>
+                <li><span class="dot"></span>Furnier</li>
+                <li><span class="dot"></span>Laminat</li>
+                <li><span class="dot"></span>Lackoberflächen</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="typeRow reverse">
+            <div class="typeText">
+              <h3>Schiebetüren</h3>
+              <p>Platzsparend und modern – perfekt für kleine Räume oder offene Grundrisse.</p>
+              <div class="materialsTitle">Optionen &amp; Systeme:</div>
+              <ul class="materials">
+                <li><span class="dot"></span>Glas</li>
+                <li><span class="dot"></span>Holz</li>
+                <li><span class="dot"></span>Wand-/Schienensystem</li>
+                <li><span class="dot"></span>Soft-Close</li>
+              </ul>
+            </div>
+            <div class="typeCardImg">
+              <img src="assets/door-schiebetuer.jpg" alt="Schiebetüren">
+            </div>
+          </div>
+
+          <div class="typeRow">
+            <div class="typeCardImg">
+              <img src="assets/door-glastuer.jpg" alt="Glastüren">
+            </div>
+            <div class="typeText">
+              <h3>Glastüren</h3>
+              <p>Mehr Licht &amp; Weite – stilvolle Lösungen für Flur, Büro oder Wohnbereich.</p>
+              <div class="materialsTitle">Verfügbare Gläser:</div>
+              <ul class="materials">
+                <li><span class="dot"></span>Sicherheitsglas</li>
+                <li><span class="dot"></span>Milchglas</li>
+                <li><span class="dot"></span>Strukturglas</li>
+                <li><span class="dot"></span>Farbglas</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="typeRow reverse">
+            <div class="typeText">
+              <h3>Designtüren</h3>
+              <p>Individuelle Lösungen – besondere Oberflächen, Sondermaße, exklusive Optik.</p>
+              <div class="materialsTitle">Möglichkeiten:</div>
+              <ul class="materials">
+                <li><span class="dot"></span>Maßanfertigung</li>
+                <li><span class="dot"></span>Sonderformate</li>
+                <li><span class="dot"></span>Individuelle Oberflächen</li>
+                <li><span class="dot"></span>Exklusive Designs</li>
+              </ul>
+            </div>
+            <div class="typeCardImg">
+              <img src="assets/door-designtuer.jpg" alt="Designtüren">
+            </div>
+          </div>
+        </div>
+
+        <div class="highlightBox">
+          <div class="highlightTitle">Was uns auszeichnet</div>
+          <div class="highlightGrid">
+            <div class="hItem"><span class="hCheck"><svg viewBox="0 0 24 24"><path d="M9.2 16.6 4.9 12.3l1.4-1.4 2.9 2.9 8.5-8.5 1.4 1.4-9.9 9.9Z"/></svg></span>Präzises Aufmaß vor Ort</div>
+            <div class="hItem"><span class="hCheck"><svg viewBox="0 0 24 24"><path d="M9.2 16.6 4.9 12.3l1.4-1.4 2.9 2.9 8.5-8.5 1.4 1.4-9.9 9.9Z"/></svg></span>Saubere Zargen-Montage</div>
+            <div class="hItem"><span class="hCheck"><svg viewBox="0 0 24 24"><path d="M9.2 16.6 4.9 12.3l1.4-1.4 2.9 2.9 8.5-8.5 1.4 1.4-9.9 9.9Z"/></svg></span>Feineinstellung der Bänder</div>
+            <div class="hItem"><span class="hCheck"><svg viewBox="0 0 24 24"><path d="M9.2 16.6 4.9 12.3l1.4-1.4 2.9 2.9 8.5-8.5 1.4 1.4-9.9 9.9Z"/></svg></span>Hochwertige Beschläge</div>
+            <div class="hItem"><span class="hCheck"><svg viewBox="0 0 24 24"><path d="M9.2 16.6 4.9 12.3l1.4-1.4 2.9 2.9 8.5-8.5 1.4 1.4-9.9 9.9Z"/></svg></span>Optionaler Schallschutz</div>
+            <div class="hItem"><span class="hCheck"><svg viewBox="0 0 24 24"><path d="M9.2 16.6 4.9 12.3l1.4-1.4 2.9 2.9 8.5-8.5 1.4 1.4-9.9 9.9Z"/></svg></span>Individuelle Beratung</div>
+          </div>
+        </div>
+
+        <div class="processTitle">Von der Beratung bis zur Montage</div>
+        <div class="processSteps">
+          <div class="pStep">
+            <div class="pCircle">1</div>
+            <h4>Beratung</h4>
+            <p>Material, Design &amp; Anforderungen klären</p>
+          </div>
+          <div class="pStep">
+            <div class="pCircle">2</div>
+            <h4>Aufmaß</h4>
+            <p>Türöffnungen exakt vermessen</p>
+          </div>
+          <div class="pStep">
+            <div class="pCircle">3</div>
+            <h4>Lieferung</h4>
+            <p>Termingerechte Anlieferung</p>
+          </div>
+          <div class="pStep">
+            <div class="pCircle">4</div>
+            <h4>Montage</h4>
+            <p>Einbau, Ausrichtung, Feineinstellung</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="bigCtaWrap">
+      <div class="bigCta">
+        <h3>Neue Türen gefällig?</h3>
+        <p>Von Beratung bis Montage – wir kümmern uns um alles und liefern ein sauberes, passgenaues Ergebnis.</p>
+        <a href="kontakt.html">
+          Beratung vereinbaren
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M13 5 20 12l-7 7-1.4-1.4 4.6-4.6H4v-2h12.2l-4.6-4.6L13 5Z"/>
+          </svg>
+        </a>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footerTop">
+        <div class="footerBrand">
+          <h3>Mosanci Innenausbau</h3>
+          <p>Your reliable partner for professional interior design and renovation work. Quality and precision for years.</p>
+        </div>
+
+        <div class="footerCol">
+          <h4>Contact</h4>
+          <a href="#">+49 (0) 2452 8607038</a>
+          <a href="#">info@mosanci.de</a>
+          <a href="#">Am Diebsweg 17, 52525 Heinsberg</a>
+        </div>
+
+        <div class="footerCol">
+          <h4>Quick Links</h4>
+          <a href="index.html">Startseite</a>
+          <a href="dienstleistungen.html">Dienstleistungen</a>
+          <a href="portfolio.html">Portfolio</a>
+          <a href="kontakt.html">Kontakt</a>
+          <a href="#">Legal Notice &amp; Privacy Policy</a>
+        </div>
+      </div>
+
+      <div class="footerBottom">
+        © 2025 Mosanci Innenausbau Interior Design &amp; Renovation. All rights reserved.
+      </div>
+    </footer>
+
+  </div>
+</body>
+</html>

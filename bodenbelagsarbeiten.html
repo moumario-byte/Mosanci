@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bodenbelagsarbeiten – Mosanci Innenausbau</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    *{box-sizing:border-box;}
+    body{
+      margin:0;
+      font-family:'Inter',sans-serif;
+      background:#ffffff;
+      color:#1f2328;
+    }
+    img{max-width:100%;height:auto;display:block;}
+    a{color:inherit;}
+
+    /* ================= FIXED HEADER (EXACT COPY FROM INDEX) ================= */
+    .topHeader{
+      position:fixed;
+      top:0;
+      left:0;
+      right:0;
+      z-index:9999;
+      background:#ffffff;
+      height:92px;
+      display:flex;
+      align-items:center;
+      border-bottom:1px solid rgba(226,229,232,.9);
+      box-shadow:0 12px 28px rgba(0,0,0,.10);
+    }
+
+    .topHeader::after{
+      content:"";
+      position:absolute;
+      left:0;
+      right:0;
+      bottom:-38px;
+      height:38px;
+      pointer-events:none;
+      background:linear-gradient(to bottom, rgba(0,0,0,.22), rgba(0,0,0,0));
+      filter:blur(10px);
+      opacity:.35;
+    }
+
+    .navwrap{
+      width:min(1180px,100%);
+      margin:0 auto;
+      padding:0 16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+    }
+
+    .logoArea img{
+      height:69px;
+      width:auto;
+      display:block;
+    }
+
+    .nav{
+      list-style:none;
+      display:flex;
+      gap:12px;
+      margin:0;
+      padding:0;
+      align-items:center;
+    }
+
+    .nav a{
+      text-decoration:none;
+      font-weight:800;
+      color:#2e3338;
+      padding:12px 18px;
+      border-radius:1px;
+      background:#f1f3f5;
+      transition:.2s ease;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+    }
+    .nav a:hover{ background:#ff6a00; color:#fff; }
+    .nav a.active{ background:#b8302a; color:#fff; }
+    .chev{ font-size:12px; opacity:.85; transform:translateY(-1px); }
+
+    .rightArea{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      white-space:nowrap;
+    }
+
+    .login{
+      background:#1f2328;
+      color:#fff;
+      padding:12px 18px;
+      border-radius:0px;
+      text-decoration:none;
+      font-weight:900;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+    }
+    .login svg{ width:18px; height:18px; fill:#fff; }
+
+    .lang{
+      display:flex;
+      align-items:center;
+      gap:6px;
+      padding:12px 14px;
+      border-radius:1px;
+      border:1px solid #e2e5e8;
+      font-weight:800;
+      color:#2e3338;
+      cursor:pointer;
+    }
+    .flagDot{
+      width:18px;height:18px;border-radius:50%;
+      background:linear-gradient(#000 0 33%, #dd0000 33% 66%, #ffce00 66% 100%);
+    }
+
+    /* ================= PAGE CONTENT (EXACT COPY FROM INDEX) ================= */
+    .pageContent{
+      padding-top:130px;
+      animation:fadeIn .18s ease;
+    }
+    @keyframes fadeIn{
+      from{opacity:0; transform:translateY(6px);}
+      to{opacity:1; transform:translateY(0);}
+    }
+
+    /* ================= EXISTING RESPONSIVE (EXACT COPY FROM INDEX) ================= */
+    @media (max-width:980px){
+      .topHeader{ height:auto; padding:12px 0; }
+      .navwrap{ flex-wrap:wrap; justify-content:center; }
+      .nav{ flex-wrap:wrap; justify-content:center; }
+      .pageContent{ padding-top:140px; }
+    }
+
+    /* ================= Mobile header like ausbau.nrw (EXACT COPY FROM INDEX) ================= */
+    .mobileActions{ display:none; } /* hidden on desktop */
+
+    @media (max-width:700px){
+      /* Hide desktop nav + right area */
+      .nav, .rightArea { display:none; }
+
+      /* Clean header */
+      .topHeader{
+        height:72px;
+        padding:0;
+      }
+      .navwrap{
+        width:100%;
+        padding:0 14px;
+        flex-wrap:nowrap;
+        justify-content:space-between;
+      }
+      .logoArea img{ height:44px; }
+
+      /* Show mobile actions */
+      .mobileActions{
+        display:flex;
+        align-items:center;
+        gap:10px;
+      }
+
+      /* Language pill */
+      .langPill{
+        display:inline-flex;
+        align-items:center;
+        gap:8px;
+        padding:10px 12px;
+        background:#fff;
+        border:1px solid #e2e5e8;
+        font-weight:800;
+        border-radius:10px;
+        cursor:pointer;
+      }
+
+      /* Burger */
+      .burger{
+        width:44px;
+        height:44px;
+        border:1px solid #e2e5e8;
+        background:#fff;
+        border-radius:10px;
+        display:inline-flex;
+        flex-direction:column;
+        justify-content:center;
+        gap:6px;
+        padding:0 12px;
+        cursor:pointer;
+      }
+      .burger span{
+        display:block;
+        height:2px;
+        background:#1f2328;
+        border-radius:2px;
+      }
+
+      /* Mobile menu drawer */
+      .mobileMenu{
+        position:fixed;
+        top:72px;
+        left:0;
+        right:0;
+        background:#fff;
+        border-top:1px solid #eef0f2;
+        box-shadow:0 18px 50px rgba(0,0,0,.14);
+        transform:translateY(-8px);
+        opacity:0;
+        pointer-events:none;
+        transition:.18s ease;
+        z-index:9998;
+        padding:12px;
+        display:grid;
+        gap:10px;
+      }
+      .mobileMenu a{
+        padding:14px 14px;
+        background:#f1f3f5;
+        border-radius:12px;
+        font-weight:900;
+        text-decoration:none;
+        color:#1f2328;
+        text-align:center;
+      }
+      .mobileMenu a:active{ transform:scale(.99); }
+      .mobileMenu .mobileLogin{
+        background:#1f2328;
+        color:#fff;
+      }
+
+      body.menuOpen .mobileMenu{
+        transform:translateY(0);
+        opacity:1;
+        pointer-events:auto;
+      }
+
+      /* Adjust content spacing for smaller fixed header */
+      .pageContent{ padding-top:105px; }
+    }
+
+    /* ================= PAGE STYLES (READABLE, CLEAN) ================= */
+    .hero{
+      padding:36px 20px 18px;
+      text-align:center;
+    }
+    .hero h1{
+      margin:0;
+      font-size:44px;
+      font-weight:900;
+      letter-spacing:.2px;
+    }
+    .hero p{
+      margin:14px auto 0;
+      max-width:900px;
+      color:#6f757c;
+      line-height:1.75;
+      font-weight:600;
+      font-size:16px;
+    }
+
+    .section{
+      padding:54px 20px;
+    }
+    .inner{
+      max-width:1100px;
+      margin:0 auto;
+    }
+
+    .sectionTitle{
+      text-align:center;
+      margin:0;
+      font-size:30px;
+      font-weight:900;
+      color:#1f2328;
+    }
+    .subtle{
+      margin:12px auto 0;
+      text-align:center;
+      max-width:900px;
+      color:#6f757c;
+      line-height:1.75;
+      font-weight:600;
+      font-size:15px;
+    }
+
+    /* Detail cards */
+    .detailGrid{
+      margin-top:34px;
+      display:grid;
+      grid-template-columns:repeat(2, 1fr);
+      gap:26px;
+    }
+    .detailCard{
+      background:#ffffff;
+      border:1px solid #eef0f2;
+      border-radius:14px;
+      overflow:hidden;
+      box-shadow:0 12px 30px rgba(0,0,0,.08);
+    }
+    .detailImg{
+      height:190px;
+      width:100%;
+      object-fit:cover;
+      display:block;
+    }
+    .detailBody{
+      padding:18px 18px 20px;
+    }
+    .detailBody h3{
+      margin:0 0 8px;
+      font-size:18px;
+      font-weight:900;
+      color:#1f2328;
+    }
+    .detailBody p{
+      margin:0 0 12px;
+      color:#6f757c;
+      line-height:1.7;
+      font-weight:600;
+      font-size:14px;
+    }
+
+    .checkList{
+      list-style:none;
+      margin:0;
+      padding:0;
+      display:grid;
+      gap:10px;
+    }
+    .checkList li{
+      display:flex;
+      align-items:flex-start;
+      gap:10px;
+      color:#2e3338;
+      font-weight:700;
+      font-size:13px;
+      line-height:1.5;
+    }
+    .check{
+      width:18px;
+      height:18px;
+      border-radius:50%;
+      background:#f1f3f5;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex:0 0 auto;
+      transform:translateY(1px);
+    }
+    .check svg{ width:12px; height:12px; fill:#2b2f33; }
+
+    /* Reco */
+    .recoWrap{ background:#f5f6f7; }
+    .recoGrid{
+      margin-top:30px;
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:18px;
+    }
+    .recoCard{
+      background:#ffffff;
+      border:1px solid #eef0f2;
+      border-radius:12px;
+      padding:16px 18px;
+      box-shadow:0 10px 22px rgba(0,0,0,.06);
+    }
+    .recoCard h4{
+      margin:0 0 8px;
+      font-size:14px;
+      font-weight:900;
+      color:#1f2328;
+    }
+    .recoCard p{
+      margin:0;
+      color:#6f757c;
+      font-weight:700;
+      font-size:13px;
+      line-height:1.55;
+    }
+
+    /* Benefits */
+    .benefitsBox{
+      margin-top:8px;
+      background:#f2fbf9;
+      border-radius:14px;
+      padding:34px 26px;
+      border:1px solid #e8f3f1;
+    }
+    .benefitsTitle{
+      text-align:center;
+      font-size:22px;
+      font-weight:900;
+      margin:0 0 22px;
+      color:#1f2328;
+    }
+    .benefitsGrid{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:18px 22px;
+    }
+    .benefitItem{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      color:#2e3338;
+      font-weight:800;
+      font-size:13px;
+      line-height:1.55;
+    }
+    .benefitItem .bCheck{
+      width:18px;
+      height:18px;
+      border-radius:50%;
+      background:#ffffff;
+      border:1px solid #dfe9e7;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex:0 0 auto;
+      transform:translateY(1px);
+    }
+    .benefitItem svg{ width:12px; height:12px; fill:#2b2f33; }
+
+    /* Process */
+    .processTitle{
+      text-align:center;
+      font-size:24px;
+      font-weight:900;
+      margin:0 0 36px;
+      color:#1f2328;
+    }
+    .processSteps{
+      display:flex;
+      justify-content:center;
+      gap:64px;
+      flex-wrap:wrap;
+    }
+    .pStep{
+      max-width:170px;
+      text-align:center;
+    }
+    .pCircle{
+      width:56px;
+      height:56px;
+      border-radius:50%;
+      background:#ff6a00;
+      color:#ffffff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:900;
+      margin:0 auto 14px;
+      box-shadow:0 10px 22px rgba(255,106,0,.25);
+    }
+    .pStep h4{
+      margin:0 0 8px;
+      font-weight:900;
+      font-size:14px;
+      color:#1f2328;
+    }
+    .pStep p{
+      margin:0;
+      color:#6f757c;
+      font-weight:700;
+      font-size:13px;
+      line-height:1.55;
+    }
+
+    /* CTA */
+    .cta{
+      background:#ff6a00;
+      color:#ffffff;
+      text-align:center;
+      padding:60px 20px;
+    }
+    .cta h3{
+      margin:0 0 10px;
+      font-size:26px;
+      font-weight:900;
+    }
+    .cta p{
+      margin:0 auto 18px;
+      max-width:760px;
+      line-height:1.65;
+      font-weight:700;
+      font-size:15px;
+    }
+    .cta a{
+      display:inline-block;
+      background:#222529;
+      color:#fff;
+      padding:14px 30px;
+      text-decoration:none;
+      font-weight:900;
+      border-radius:4px;
+      transition:.2s ease;
+    }
+    .cta a:hover{ background:#16181b; }
+
+    /* ================= FOOTER (EXACT COPY FROM INDEX) ================= */
+    footer{
+      background:#25272a;
+      color:#f1f3f5;
+      margin-top:0;
+    }
+    .footerTop{
+      max-width:1100px;
+      margin:0 auto;
+      padding:60px 20px;
+      display:grid;
+      grid-template-columns:1.3fr 1fr 1fr;
+      gap:40px;
+    }
+    .footerBrand h3{ margin:0; font-weight:900; }
+    .footerBrand p{
+      margin-top:12px;
+      line-height:1.6;
+      color:#cfd3d7;
+      font-weight:500;
+    }
+    .footerCol h4{ margin:0 0 15px; font-weight:900; }
+
+    .footer-contact{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin-bottom:12px;
+      color:#cfd3d7;
+      font-weight:600;
+      text-decoration:none;
+    }
+    .footer-contact svg{
+      width:16px;
+      height:16px;
+      fill:#cfd3d7;
+      flex:0 0 16px;
+    }
+
+    .footerCol a.link{
+      display:block;
+      margin-bottom:10px;
+      color:#cfd3d7;
+      text-decoration:none;
+      font-weight:600;
+      transition:.2s ease;
+    }
+    .footerCol a.link:hover{ color:#fff; }
+
+    .footerBottom{
+      border-top:1px solid rgba(255,255,255,.08);
+      text-align:center;
+      padding:20px;
+      font-size:13px;
+      color:#9ca3af;
+      font-weight:600;
+    }
+
+    /* Page responsive */
+    @media(max-width:900px){
+      .detailGrid{ grid-template-columns:1fr; }
+      .recoGrid{ grid-template-columns:1fr; }
+      .benefitsGrid{ grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER (EXACT COPY FROM INDEX) -->
+  <header class="topHeader">
+    <div class="navwrap">
+      <div class="logoArea">
+        <img src="logo.png" alt="Mosanci Innenausbau">
+      </div>
+
+      <!-- Desktop NAV -->
+      <ul class="nav">
+        <li><a href="index.html">Startseite</a></li>
+        <li><a href="ueber-uns.html">Über uns <span class="chev">▾</span></a></li>
+        <li><a class="active" href="dienstleistungen.html">Dienstleistungen <span class="chev">▾</span></a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="kontakt.html">Kontakt</a></li>
+      </ul>
+
+      <!-- Desktop right area -->
+      <div class="rightArea">
+        <a class="login" href="#">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 12a4.5 4.5 0 1 0-4.5-4.5A4.5 4.5 0 0 0 12 12Zm0 2c-4.42 0-8 2.24-8 5v1h16v-1c0-2.76-3.58-5-8-5Z"/>
+          </svg>
+          Login
+        </a>
+
+        <div class="lang">
+          <span class="flagDot" aria-hidden="true"></span>
+          <span>DE</span>
+          <span class="chev">▾</span>
+        </div>
+      </div>
+
+      <!-- Mobile actions -->
+      <div class="mobileActions">
+        <button class="langPill" type="button" aria-label="Sprache">
+          <span class="flagDot" aria-hidden="true"></span>
+          <span>DE</span>
+          <span class="chev">▾</span>
+        </button>
+
+        <button class="burger" type="button" aria-label="Menü öffnen" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile menu drawer -->
+  <nav class="mobileMenu" aria-label="Mobile Navigation">
+    <a href="index.html">Startseite</a>
+    <a href="ueber-uns.html">Über uns</a>
+    <a href="dienstleistungen.html">Dienstleistungen</a>
+    <a href="portfolio.html">Portfolio</a>
+    <a href="kontakt.html">Kontakt</a>
+    <a class="mobileLogin" href="#">Login</a>
+  </nav>
+
+  <!-- PAGE CONTENT -->
+  <div class="pageContent">
+
+    <section class="hero">
+      <h1>Bodenbelagsarbeiten</h1>
+      <p>
+        Wir verlegen hochwertige Bodenbeläge mit perfekter Vorbereitung, sauberem Finish und langlebigem Ergebnis.
+        Von Laminat über Vinyl bis Fliesen – wir beraten Sie individuell und setzen Ihr Projekt professionell um.
+      </p>
+    </section>
+
+    <!-- BODENBELAG-ARTEN -->
+    <section class="section">
+      <div class="inner">
+        <h2 class="sectionTitle">Bodenbelag-Arten im Detail</h2>
+        <p class="subtle">Welche Lösung passt zu Ihrem Raum? Wir helfen bei Auswahl, Aufbau und fachgerechter Verlegung.</p>
+
+        <div class="detailGrid">
+          <article class="detailCard">
+            <img class="detailImg" src="floor-laminate.jpg" alt="Laminat & Parkett">
+            <div class="detailBody">
+              <h3>Laminat &amp; Parkett</h3>
+              <p>Hochwertige Holzböden für natürliche Wärme und Eleganz.</p>
+              <ul class="checkList">
+                <li><span class="check"><svg viewBox="0 0 24 24"><path d="M9.2 16.6 4.9 12.3l1.4-1.4 2.9 2.9 8.5-8.5 1.4 1.4-9.9 9.9Z"/></svg></span>Natürliche Optik</li>
+                <li><span class="check"><svg viewBox="0 0 24 24"><path d="M9.2 16.6 4.9 12.3l1.4-1.4 2.9 2.9 8.5-8.5 1.4 1.4-9.9 9.9Z"/></svg></span>Langlebig &amp; wertig</li>
+                <li><span class="check"><svg viewBox="0 0 24 24"><path d="M9.2 16.6 4.9 12.3l1.4-1.4 2.9 2.9 8.5-8.5 1.4 1.4-9.9 9.9Z"/></svg></span>Pflegeleicht</li>
+                <li><span class="check"><svg viewBox="0 0 24 24"><path d="M9.2 16.6 4.9 12.3l1.4-1.4 2.9 2.9 8.5-8.5 1.4 1.4-9.9 9.9Z"/></svg></span>Viele Holz- &amp; Dekorvarianten</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="detailCard">
+            <img class="detailImg" src="floor-vinyl.jpg" alt="Vinyl & PVC-Böden">
+            <div class="detailBody">
+              <h3>Vinyl &amp; PVC-Böden</h3>
+              <p>Modern, leise und robust – ideal für Alltag und Familie.</p>
+              <ul class="checkList">
+                <li><span class="check"><svg viewBox="0 0 24 24"><path d="M9.2 16.6 4.9 12.3l1.4-1.4 2.9 2.9 8.5-8.5 1.4 1.4-9.9 9.9Z"/></svg></span>Wasserresistent</li>
+                <li><span class="check"><svg viewBox="0 0 24 24"><path d="M9.2 16.6 4.9 12.3l1.4-1.4 2.9 2.9 8.5-8.5 1.4 1.4-9.9 9.9Z"/></svg></span>Strapazierfähig</li>
+                <li><span class="check"><svg viewBox="0 0 24 24"><path d="M9.2 16.6 4.9 12.3l1.4-1.4 2.9 2.9 8.5-8.5 1.4 1.4-9.9 9.9Z"/></svg></span>Viele Designs &amp; Strukturen</li>
+                <li><span class="check"><svg viewBox="0 0 24 24"><path d="M9.2 16.6 4.9 12.3l1.4-1.4 2.9 2.9 8.5-8.5 1.4 1.4-9.9 9.9Z"/></svg></span>Schnelle Verlegung</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="detailCard">
+            <img class="detailImg" src="floor-tiles.jpg" alt="Fliesen & Naturstein">
+            <div class="detailBody">
+              <h3>Fliesen &amp; Naturstein</h3>
+              <p>Robust und edel – perfekt für Bad, Küche und Eingangsbereiche.</p>
+              <ul class="checkList">
+                <li><span class="check"><svg viewBox="0 0 24 24"><path d="M9.2 16.6 4.9 12.3l1.4-1.4 2.9 2.9 8.5-8.5 1.4 1.4-9.9 9.9Z"/></svg></span>Feuchtigkeitsresistent</li>
+                <li><span class="check"><svg viewBox="0 0 24 24"><path d="M9.2 16.6 4.9 12.3l1.4-1.4 2.9 2.9 8.5-8.5 1.4 1.4-9.9 9.9Z"/></svg></span>Hygienisch &amp; pflegeleicht</li>
+                <li><span class="check"><svg viewBox="0 0 24 24"><path d="M9.2 16.6 4.9 12.3l1.4-1.4 2.9 2.9 8.5-8.5 1.4 1.4-9.9 9.9Z"/></svg></span>Temperaturbeständig</li>
+                <li><span class="check"><svg viewBox="0 0 24 24"><path d="M9.2 16.6 4.9 12.3l1.4-1.4 2.9 2.9 8.5-8.5 1.4 1.4-9.9 9.9Z"/></svg></span>Edle Optik</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="detailCard">
+            <img class="detailImg" src="floor-teppich.jpg" alt="Teppichböden">
+            <div class="detailBody">
+              <h3>Teppichböden</h3>
+              <p>Warm, leise und gemütlich – besonders angenehm in Wohn- &amp; Schlafräumen.</p>
+              <ul class="checkList">
+                <li><span class="check"><svg viewBox="0 0 24 24"><path d="M9.2 16.6 4.9 12.3l1.4-1.4 2.9 2.9 8.5-8.5 1.4 1.4-9.9 9.9Z"/></svg></span>Wärmedämmend</li>
+                <li><span class="check"><svg viewBox="0 0 24 24"><path d="M9.2 16.6 4.9 12.3l1.4-1.4 2.9 2.9 8.5-8.5 1.4 1.4-9.9 9.9Z"/></svg></span>Schalldämpfend</li>
+                <li><span class="check"><svg viewBox="0 0 24 24"><path d="M9.2 16.6 4.9 12.3l1.4-1.4 2.9 2.9 8.5-8.5 1.4 1.4-9.9 9.9Z"/></svg></span>Komfortabel</li>
+                <li><span class="check"><svg viewBox="0 0 24 24"><path d="M9.2 16.6 4.9 12.3l1.4-1.4 2.9 2.9 8.5-8.5 1.4 1.4-9.9 9.9Z"/></svg></span>Große Farbauswahl</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- EMPFEHLUNGEN -->
+    <section class="section recoWrap">
+      <div class="inner">
+        <h2 class="sectionTitle">Empfehlungen nach Räumen</h2>
+        <p class="subtle">So finden Sie schneller den passenden Boden – wir beraten natürlich individuell.</p>
+
+        <div class="recoGrid">
+          <div class="recoCard"><h4>Wohnzimmer</h4><p>Parkett, Laminat, hochwertige Vinylböden</p></div>
+          <div class="recoCard"><h4>Küche</h4><p>Fliesen, Vinyl, pflegeleichte Materialien</p></div>
+          <div class="recoCard"><h4>Badezimmer</h4><p>Feuchtigkeitsresistente Fliesen &amp; Vinyl</p></div>
+          <div class="recoCard"><h4>Schlafzimmer</h4><p>Parkett, Laminat, warme Teppichböden</p></div>
+          <div class="recoCard"><h4>Flur/Eingang</h4><p>Strapazierfähige Fliesen &amp; Vinyl</p></div>
+          <div class="recoCard"><h4>Arbeitszimmer</h4><p>Laminat, Parkett, schalldämpfende Böden</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VORTEILE -->
+    <section class="section">
+      <div class="inner">
+        <h2 class="sectionTitle">Ihre Vorteile bei Mosanci Innenausbau</h2>
+        <p class="subtle">Transparent, sauber und präzise – so erreichen wir ein Ergebnis, das lange hält.</p>
+
+        <div class="benefitsBox">
+          <div class="benefitsTitle">Das bekommen Sie bei uns</div>
+
+          <div class="benefitsGrid">
+            <div class="benefitItem"><span class="bCheck"><svg viewBox="0 0 24 24"><path d="M9.2 16.6 4.9 12.3l1.4-1.4 2.9 2.9 8.5-8.5 1.4 1.4-9.9 9.9Z"/></svg></span>Kostenlose Beratung &amp; Materialauswahl</div>
+            <div class="benefitItem"><span class="bCheck"><svg viewBox="0 0 24 24"><path d="M9.2 16.6 4.9 12.3l1.4-1.4 2.9 2.9 8.5-8.5 1.4 1.4-9.9 9.9Z"/></svg></span>Präzises Aufmaß &amp; Angebot</div>
+            <div class="benefitItem"><span class="bCheck"><svg viewBox="0 0 24 24"><path d="M9.2 16.6 4.9 12.3l1.4-1.4 2.9 2.9 8.5-8.5 1.4 1.4-9.9 9.9Z"/></svg></span>Untergrundprüfung &amp; Vorbereitung</div>
+            <div class="benefitItem"><span class="bCheck"><svg viewBox="0 0 24 24"><path d="M9.2 16.6 4.9 12.3l1.4-1.4 2.9 2.9 8.5-8.5 1.4 1.4-9.9 9.9Z"/></svg></span>Fachgerechte Verlegung aller Bodenarten</div>
+            <div class="benefitItem"><span class="bCheck"><svg viewBox="0 0 24 24"><path d="M9.2 16.6 4.9 12.3l1.4-1.4 2.9 2.9 8.5-8.5 1.4 1.4-9.9 9.9Z"/></svg></span>Übergänge &amp; Randabschlüsse sauber</div>
+            <div class="benefitItem"><span class="bCheck"><svg viewBox="0 0 24 24"><path d="M9.2 16.6 4.9 12.3l1.4-1.4 2.9 2.9 8.5-8.5 1.4 1.4-9.9 9.9Z"/></svg></span>Pflege- &amp; Nutzungsberatung</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section class="section recoWrap">
+      <div class="inner">
+        <div class="processTitle">Unser Verlegeprozess</div>
+
+        <div class="processSteps">
+          <div class="pStep">
+            <div class="pCircle">1</div>
+            <h4>Beratung</h4>
+            <p>Material, Aufbau &amp; Raumwirkung</p>
+          </div>
+          <div class="pStep">
+            <div class="pCircle">2</div>
+            <h4>Aufmaß</h4>
+            <p>Präzise Vermessung &amp; Planung</p>
+          </div>
+          <div class="pStep">
+            <div class="pCircle">3</div>
+            <h4>Vorbereitung</h4>
+            <p>Untergrund prüfen, ausgleichen</p>
+          </div>
+          <div class="pStep">
+            <div class="pCircle">4</div>
+            <h4>Verlegung</h4>
+            <p>Sauber, gerade, fachgerecht</p>
+          </div>
+          <div class="pStep">
+            <div class="pCircle">5</div>
+            <h4>Abschluss</h4>
+            <p>Reinigung, Übergabe, Qualität</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+      <h3>Jetzt Bodenbelag anfragen</h3>
+      <p>Wir beraten Sie kostenlos und finden gemeinsam den perfekten Boden für Ihr Projekt.</p>
+      <a href="kontakt.html">Kostenlose Beratung anfragen</a>
+    </section>
+
+    <!-- FOOTER (EXACT COPY FROM INDEX) -->
+    <footer>
+      <div class="footerTop">
+        <div class="footerBrand">
+          <h3>Mosanci Innenausbau</h3>
+          <p>Ihr Partner für professionellen Innenausbau &amp; Renovierung. Qualität und Präzision seit Jahren.</p>
+        </div>
+
+        <div class="footerCol">
+          <h4>Kontakt</h4>
+
+          <a class="footer-contact" href="tel:+4924528607038">
+            <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V21a1 1 0 0 1-1 1C10.85 22 2 13.15 2 2a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.24.2 2.45.57 3.57a1 1 0 0 1-.25 1.02l-2.2 2.2Z"/></svg>
+            +49 (0) 2452 8607038
+          </a>
+
+          <a class="footer-contact" href="mailto:info@mosanci.de">
+            <svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4-8 5L4 8V6l8 5 8-5Z"/></svg>
+            info@mosanci.de
+          </a>
+
+          <div class="footer-contact" style="cursor:default;">
+            <svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Z"/></svg>
+            Am Diebsweg 17, 52525 Heinsberg
+          </div>
+        </div>
+
+        <div class="footerCol">
+          <h4>Quick Links</h4>
+          <a class="link" href="ueber-uns.html">Über uns</a>
+          <a class="link" href="dienstleistungen.html">Dienstleistungen</a>
+          <a class="link" href="portfolio.html">Portfolio</a>
+          <a class="link" href="kontakt.html">Kontakt</a>
+          <a class="link" href="#">Impressum &amp; Datenschutz</a>
+        </div>
+      </div>
+
+      <div class="footerBottom">
+        © 2025 Mosanci Innenausbau. Alle Rechte vorbehalten.
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Mobile menu toggle (EXACT COPY FROM INDEX) -->
+  <script>
+    const burger = document.querySelector(".burger");
+    if (burger) {
+      burger.addEventListener("click", () => {
+        const open = document.body.classList.toggle("menuOpen");
+        burger.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+    }
+  </script>
+
+</body>
+</html>
